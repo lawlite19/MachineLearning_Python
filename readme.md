@@ -1,7 +1,8 @@
 机器学习算法Python实现
 =========
 
-## 一、线性回归
+## 一、[线性回归](/LinearRegression)
+- [全部代码](/LinearRegression/LinearRegression.py)
 
 ### 1、代价函数
 - ![J(\theta ) = \frac{1}{{2{\text{m}}}}\sum\limits_{i = 1}^m {{{({h_\theta }({x^{(i)}}) - {y^{(i)}})}^2}} ](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=J%28%5Ctheta%20%29%20%3D%20%5Cfrac%7B1%7D%7B%7B2%7B%5Ctext%7Bm%7D%7D%7D%7D%5Csum%5Climits_%7Bi%20%3D%201%7D%5Em%20%7B%7B%7B%28%7Bh_%5Ctheta%20%7D%28%7Bx%5E%7B%28i%29%7D%7D%29%20-%20%7By%5E%7B%28i%29%7D%7D%29%7D%5E2%7D%7D%20)
@@ -80,15 +81,14 @@ def featureNormaliza(X):
 
 
   [1]: ./images/LinearRegression_01.png "LinearRegression_01.png"
-  
-### 5、使用scikit-learn库中的线性模型
-- [scikit-learn实现代码](/LinearRegression/LinearRegression.py)
- - 导入包
+
+### 5、[使用scikit-learn库中的线性模型实现](/LinearRegression/LinearRegression_scikit-learn.py)
+- 导入包
 ```
 from sklearn import linear_model
 from sklearn.preprocessing import StandardScaler    #引入缩放的包
 ```
- - 归一化
+- 归一化
 ```
     # 归一化操作
     scaler = StandardScaler()   
@@ -96,13 +96,13 @@ from sklearn.preprocessing import StandardScaler    #引入缩放的包
     x_train = scaler.transform(X)
     x_test = scaler.transform(np.array([1650,3]))
 ```
- - 线性模型拟合
+- 线性模型拟合
 ```
     # 线性模型拟合
     model = linear_model.LinearRegression()
     model.fit(x_train, y)
-```
- - 预测
+``` 
+- 预测
 ```
     #预测结果
     result = model.predict(x_test)
