@@ -1,109 +1,113 @@
+#-*- coding: utf-8 -*-
 import numpy as np
 from matplotlib import pyplot as plt
+from matplotlib.font_manager import FontProperties
+font = FontProperties(fname=r"c:\windows\fonts\simsun.ttc", size=14)    # è§£å†³windowsç¯å¢ƒä¸‹ç”»å›¾æ±‰å­—ä¹±ç é—®é¢˜
 
 
 def linearRegression(alpha=0.01,num_iters=400):
-    print "¼ÓÔØÊı¾İ...\n"
+    print u"åŠ è½½æ•°æ®...\n"
     
-    data = loadtxtAndcsv_data("data.txt",",",np.float64)  #¶ÁÈ¡Êı¾İ
-    X = data[:,0:-1]      # X¶ÔÓ¦0µ½µ¹ÊıµÚ2ÁĞ                  
-    y = data[:,-1]        # y¶ÔÓ¦×îºóÒ»ÁĞ  
-    m = len(y)            # ×ÜµÄÊı¾İÌõÊı
-    col = data.shape[1]      # dataµÄÁĞÊı
+    data = loadtxtAndcsv_data("data.txt",",",np.float64)  #è¯»å–æ•°æ®
+    X = data[:,0:-1]      # Xå¯¹åº”0åˆ°å€’æ•°ç¬¬2åˆ—                  
+    y = data[:,-1]        # yå¯¹åº”æœ€åä¸€åˆ—  
+    m = len(y)            # æ€»çš„æ•°æ®æ¡æ•°
+    col = data.shape[1]      # dataçš„åˆ—æ•°
     
-    X,mu,sigma = featureNormaliza(X)    # ¹éÒ»»¯
-    plot_X1_X2(X)         # »­Í¼¿´Ò»ÏÂ¹éÒ»»¯Ğ§¹û
+    X,mu,sigma = featureNormaliza(X)    # å½’ä¸€åŒ–
+    plot_X1_X2(X)         # ç”»å›¾çœ‹ä¸€ä¸‹å½’ä¸€åŒ–æ•ˆæœ
     
-    X = np.hstack((np.ones((m,1)),X))    # ÔÚXÇ°¼ÓÒ»ÁĞ1
+    X = np.hstack((np.ones((m,1)),X))    # åœ¨Xå‰åŠ ä¸€åˆ—1
     
-    print "\nÖ´ĞĞÌİ¶ÈÏÂ½µËã·¨....\n"
+    print u"\næ‰§è¡Œæ¢¯åº¦ä¸‹é™ç®—æ³•....\n"
     
     theta = np.zeros((col,1))
-    y = y.reshape(-1,1)   #½«ĞĞÏòÁ¿×ª»¯ÎªÁĞ
+    y = y.reshape(-1,1)   #å°†è¡Œå‘é‡è½¬åŒ–ä¸ºåˆ—
     theta,J_history = gradientDescent(X, y, theta, alpha, num_iters)
     
     plotJ(J_history, num_iters)
     
-    return mu,sigma,theta   #·µ»Ø¾ùÖµmu,±ê×¼²îsigma,ºÍÑ§Ï°µÄ½á¹ûtheta
+    return mu,sigma,theta   #è¿”å›å‡å€¼mu,æ ‡å‡†å·®sigma,å’Œå­¦ä¹ çš„ç»“æœtheta
     
    
-# ¼ÓÔØtxtºÍcsvÎÄ¼ş
+# åŠ è½½txtå’Œcsvæ–‡ä»¶
 def loadtxtAndcsv_data(fileName,split,dataType):
     return np.loadtxt(fileName,delimiter=split,dtype=dataType)
 
-# ¼ÓÔØnpyÎÄ¼ş
+# åŠ è½½npyæ–‡ä»¶
 def loadnpy_data(fileName):
     return np.load(fileName)
 
-# ¹éÒ»»¯feature
+# å½’ä¸€åŒ–feature
 def featureNormaliza(X):
-    X_norm = np.array(X)            #½«X×ª»¯ÎªnumpyÊı×é¶ÔÏó£¬²Å¿ÉÒÔ½øĞĞ¾ØÕóµÄÔËËã
-    #¶¨ÒåËùĞè±äÁ¿
+    X_norm = np.array(X)            #å°†Xè½¬åŒ–ä¸ºnumpyæ•°ç»„å¯¹è±¡ï¼Œæ‰å¯ä»¥è¿›è¡ŒçŸ©é˜µçš„è¿ç®—
+    #å®šä¹‰æ‰€éœ€å˜é‡
     mu = np.zeros((1,X.shape[1]))   
     sigma = np.zeros((1,X.shape[1]))
     
-    mu = np.mean(X_norm,0)          # ÇóÃ¿Ò»ÁĞµÄÆ½¾ùÖµ£¨0Ö¸¶¨ÎªÁĞ£¬1´ú±íĞĞ£©
-    sigma = np.std(X_norm,0)        # ÇóÃ¿Ò»ÁĞµÄ±ê×¼²î
-    for i in range(X.shape[1]):     # ±éÀúÁĞ
-        X_norm[:,i] = (X_norm[:,i]-mu[i])/sigma[i]  # ¹éÒ»»¯
+    mu = np.mean(X_norm,0)          # æ±‚æ¯ä¸€åˆ—çš„å¹³å‡å€¼ï¼ˆ0æŒ‡å®šä¸ºåˆ—ï¼Œ1ä»£è¡¨è¡Œï¼‰
+    sigma = np.std(X_norm,0)        # æ±‚æ¯ä¸€åˆ—çš„æ ‡å‡†å·®
+    for i in range(X.shape[1]):     # éå†åˆ—
+        X_norm[:,i] = (X_norm[:,i]-mu[i])/sigma[i]  # å½’ä¸€åŒ–
     
     return X_norm,mu,sigma
 
-# »­¶şÎ¬Í¼
+# ç”»äºŒç»´å›¾
 def plot_X1_X2(X):
     plt.scatter(X[:,0],X[:,1])
     plt.show()
 
 
-# Ìİ¶ÈÏÂ½µËã·¨
+# æ¢¯åº¦ä¸‹é™ç®—æ³•
 def gradientDescent(X,y,theta,alpha,num_iters):
     m = len(y)      
     n = len(theta)
     
-    temp = np.matrix(np.zeros((n,num_iters)))   # Ôİ´æÃ¿´Îµü´ú¼ÆËãµÄtheta£¬×ª»¯Îª¾ØÕóĞÎÊ½
+    temp = np.matrix(np.zeros((n,num_iters)))   # æš‚å­˜æ¯æ¬¡è¿­ä»£è®¡ç®—çš„thetaï¼Œè½¬åŒ–ä¸ºçŸ©é˜µå½¢å¼
     
     
-    J_history = np.zeros((num_iters,1)) #¼ÇÂ¼Ã¿´Îµü´ú¼ÆËãµÄ´ú¼ÛÖµ
+    J_history = np.zeros((num_iters,1)) #è®°å½•æ¯æ¬¡è¿­ä»£è®¡ç®—çš„ä»£ä»·å€¼
     
-    for i in range(num_iters):  # ±éÀúµü´ú´ÎÊı    
-        h = np.dot(X,theta)     # ¼ÆËãÄÚ»ı£¬matrix¿ÉÒÔÖ±½Ó³Ë
-        temp[:,i] = theta - ((alpha/m)*(np.dot(np.transpose(X),h-y)))   #Ìİ¶ÈµÄ¼ÆËã
+    for i in range(num_iters):  # éå†è¿­ä»£æ¬¡æ•°    
+        h = np.dot(X,theta)     # è®¡ç®—å†…ç§¯ï¼Œmatrixå¯ä»¥ç›´æ¥ä¹˜
+        temp[:,i] = theta - ((alpha/m)*(np.dot(np.transpose(X),h-y)))   #æ¢¯åº¦çš„è®¡ç®—
         theta = temp[:,i]
-        J_history[i] = computerCost(X,y,theta)      #µ÷ÓÃ¼ÆËã´ú¼Ûº¯Êı
+        J_history[i] = computerCost(X,y,theta)      #è°ƒç”¨è®¡ç®—ä»£ä»·å‡½æ•°
         print '.',      
     return theta,J_history  
 
-# ¼ÆËã´ú¼Ûº¯Êı
+# è®¡ç®—ä»£ä»·å‡½æ•°
 def computerCost(X,y,theta):
     m = len(y)
     J = 0
     
-    J = (np.transpose(X*theta-y))*(X*theta-y)/(2*m) #¼ÆËã´ú¼ÛJ
+    J = (np.transpose(X*theta-y))*(X*theta-y)/(2*m) #è®¡ç®—ä»£ä»·J
     return J
 
-# »­Ã¿´Îµü´ú´ú¼ÛµÄ±ä»¯Í¼
+# ç”»æ¯æ¬¡è¿­ä»£ä»£ä»·çš„å˜åŒ–å›¾
 def plotJ(J_history,num_iters):
     x = np.arange(1,num_iters+1)
     plt.plot(x,J_history)
-    plt.xlabel("num_iters")
-    plt.ylabel("J")
+    plt.xlabel(u"è¿­ä»£æ¬¡æ•°",fontproperties=font) # æ³¨æ„æŒ‡å®šå­—ä½“ï¼Œè¦ä¸ç„¶å‡ºç°ä¹±ç é—®é¢˜
+    plt.ylabel(u"ä»£ä»·å€¼",fontproperties=font)
+    plt.title(u"ä»£ä»·éšè¿­ä»£æ¬¡æ•°çš„å˜åŒ–",fontproperties=font)
     plt.show()
 
-# ²âÊÔlinearRegressionº¯Êı
+# æµ‹è¯•linearRegressionå‡½æ•°
 def testLinearRegression():
     mu,sigma,theta = linearRegression(0.01,400)
-    print "\n¼ÆËãµÄthetaÖµÎª£º\n",theta
-    print "\nÔ¤²â½á¹ûÎª£º%f"%predict(mu, sigma, theta)
+    print u"\nè®¡ç®—çš„thetaå€¼ä¸ºï¼š\n",theta
+    print u"\né¢„æµ‹ç»“æœä¸ºï¼š%f"%predict(mu, sigma, theta)
     
-# ²âÊÔÑ§Ï°Ğ§¹û£¨Ô¤²â£©
+# æµ‹è¯•å­¦ä¹ æ•ˆæœï¼ˆé¢„æµ‹ï¼‰
 def predict(mu,sigma,theta):
     result = 0
-    # ×¢Òâ¹éÒ»»¯
+    # æ³¨æ„å½’ä¸€åŒ–
     predict = np.array([1650,3])
     norm_predict = (predict-mu)/sigma
     final_predict = np.hstack((np.ones((1)),norm_predict))
     
-    result = np.dot(final_predict,theta)    # Ô¤²â½á¹û
+    result = np.dot(final_predict,theta)    # é¢„æµ‹ç»“æœ
     return result
     
     
