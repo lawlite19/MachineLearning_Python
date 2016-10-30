@@ -80,15 +80,15 @@ def featureNormaliza(X):
 
 
   [1]: ./images/LinearRegression_01.png "LinearRegression_01.png"
-  
-### 5、使用scikit-learn库中的线性模型
-- [scikit-learn实现代码](/LinearRegression/LinearRegression.py)
- - 导入包
+- [全部代码](/LinearRegression/LinearRegression.py)
+
+### 5、[使用scikit-learn库中的线性模型实现](/LinearRegression/LinearRegression_scikit-learn.py)
+- 导入包
 ```
 from sklearn import linear_model
 from sklearn.preprocessing import StandardScaler    #引入缩放的包
 ```
- - 归一化
+- 归一化
 ```
     # 归一化操作
     scaler = StandardScaler()   
@@ -96,13 +96,13 @@ from sklearn.preprocessing import StandardScaler    #引入缩放的包
     x_train = scaler.transform(X)
     x_test = scaler.transform(np.array([1650,3]))
 ```
- - 线性模型拟合
+- 线性模型拟合
 ```
     # 线性模型拟合
     model = linear_model.LinearRegression()
     model.fit(x_train, y)
-```
- - 预测
+``` 
+- 预测
 ```
     #预测结果
     result = model.predict(x_test)
