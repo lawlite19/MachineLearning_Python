@@ -75,7 +75,7 @@ def featureNormaliza(X):
 - 注意预测的时候也需要均值归一化数据
 
 ### 4、最终运行结果
-- 代价随迭代次数的变化
+- 代价随迭代次数的变化   
 ![enter description here][1]
 
 
