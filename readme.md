@@ -73,3 +73,8 @@ def featureNormaliza(X):
     return X_norm,mu,sigma
 ```
 - 注意预测的时候也需要均值归一化数据
+
+### 3、最终运行结果
+    ![enter code here][1]
+
+  [1]: ./images/LinearRegression_01.png "LinearRegression_01.png"
