@@ -98,7 +98,7 @@ def gradient(initial_theta,X,y,inital_lambda):
 def sigmoid(z):
     h = np.zeros((len(z),1))    # 初始化，与z的长度一置
     
-    h = 1.0/(1+np.exp(-z))
+    h = 1.0/(1.0+np.exp(-z))
     return h
 
 

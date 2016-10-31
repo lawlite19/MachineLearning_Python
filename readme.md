@@ -80,8 +80,6 @@ def featureNormaliza(X):
 ![enter description here][1]
 
 
-  [1]: ./images/LinearRegression_01.png "LinearRegression_01.png"
-
 ### 5、[使用scikit-learn库中的线性模型实现](/LinearRegression/LinearRegression_scikit-learn.py)
 - 导入包
 ```
@@ -109,3 +107,27 @@ from sklearn.preprocessing import StandardScaler    #引入缩放的包
 ```
   
 ## 二、逻辑回归
+- [全部代码](/LogisticRegression/LogisticRegression.py)
+### 1、代价函数
+- ![\left\{ \begin{gathered}
+  J(\theta ) = \frac{1}{m}\sum\limits_{i = 1}^m {\cos t({h_\theta }({x^{(i)}}),{y^{(i)}})}  \hfill \\
+  \cos t({h_\theta }(x),y) = \left\{ {\begin{array}{c}    { - \log ({h_\theta }(x))\begin{array}{c}    {}&amp; {y = 1}  \end{array} } \\    { - \log (1 - {h_\theta }(x))\begin{array}{c}    {}&amp; {y = 0}  \end{array} }  \end{array} } \right. \hfill \\ 
+\end{gathered}  \right.](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%5Cleft%5C%7B%20%5Cbegin%7Bgathered%7D%0A%20%20J%28%5Ctheta%20%29%20%3D%20%5Cfrac%7B1%7D%7Bm%7D%5Csum%5Climits_%7Bi%20%3D%201%7D%5Em%20%7B%5Ccos%20t%28%7Bh_%5Ctheta%20%7D%28%7Bx%5E%7B%28i%29%7D%7D%29%2C%7By%5E%7B%28i%29%7D%7D%29%7D%20%20%5Chfill%20%5C%5C%0A%20%20%5Ccos%20t%28%7Bh_%5Ctheta%20%7D%28x%29%2Cy%29%20%3D%20%5Cleft%5C%7B%20%7B%5Cbegin%7Barray%7D%7Bc%7D%20%20%20%20%7B%20-%20%5Clog%20%28%7Bh_%5Ctheta%20%7D%28x%29%29%5Cbegin%7Barray%7D%7Bc%7D%20%20%20%20%7B%7D%26%20%7By%20%3D%201%7D%20%20%5Cend%7Barray%7D%20%7D%20%5C%5C%20%20%20%20%7B%20-%20%5Clog%20%281%20-%20%7Bh_%5Ctheta%20%7D%28x%29%29%5Cbegin%7Barray%7D%7Bc%7D%20%20%20%20%7B%7D%26%20%7By%20%3D%200%7D%20%20%5Cend%7Barray%7D%20%7D%20%20%5Cend%7Barray%7D%20%7D%20%5Cright.%20%5Chfill%20%5C%5C%20%0A%5Cend%7Bgathered%7D%20%20%5Cright.)
+- 可以综合起来为：
+![J(\theta ) =  - \frac{1}{m}\sum\limits_{i = 1}^m {[{y^{(i)}}\log ({h_\theta }({x^{(i)}}) + (1 - } {y^{(i)}})\log (1 - {h_\theta }({x^{(i)}})]](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=J%28%5Ctheta%20%29%20%3D%20%20-%20%5Cfrac%7B1%7D%7Bm%7D%5Csum%5Climits_%7Bi%20%3D%201%7D%5Em%20%7B%5B%7By%5E%7B%28i%29%7D%7D%5Clog%20%28%7Bh_%5Ctheta%20%7D%28%7Bx%5E%7B%28i%29%7D%7D%29%20%2B%20%281%20-%20%7D%20%7By%5E%7B%28i%29%7D%7D%29%5Clog%20%281%20-%20%7Bh_%5Ctheta%20%7D%28%7Bx%5E%7B%28i%29%7D%7D%29%5D)
+其中：
+![{h_\theta }(x) = \frac{1}{{1 + {e^{ - x}}}}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7Bh_%5Ctheta%20%7D%28x%29%20%3D%20%5Cfrac%7B1%7D%7B%7B1%20%2B%20%7Be%5E%7B%20-%20x%7D%7D%7D%7D)
+- 为什么不用线性回归的代价函数表示，因为线性回归的代价函数可能是非凸的，对于分类问题，使用梯度下降很难得到最小值，上面的代价函数是凸函数
+- ![{ - \log ({h_\theta }(x))}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7B%20-%20%5Clog%20%28%7Bh_%5Ctheta%20%7D%28x%29%29%7D)的图像如下，即`y=1`时：
+![enter description here][2]
+可以看出，当![{{h_\theta }(x)}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7B%7Bh_%5Ctheta%20%7D%28x%29%7D)趋于`1`，`y=1`,与预测值一致，此时付出的代价`cost`趋于`0`，若![{{h_\theta }(x)}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7B%7Bh_%5Ctheta%20%7D%28x%29%7D)趋于`0`，`y=1`,此时的代价`cost`值非常大，我们最终的目的是最小化带价值代价值
+- 同理![{ - \log (1 - {h_\theta }(x))}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7B%20-%20%5Clog%20%281%20-%20%7Bh_%5Ctheta%20%7D%28x%29%29%7D)的图像如下（`y=0`）：
+![enter description here][3]
+
+
+
+
+
+  [1]: ./images/LinearRegression_01.png "LinearRegression_01.png"
+  [2]: ./images/LogisticRegression_01.png "LogisticRegression_01.png"
+  [3]: ./images/LogisticRegression_02.png "LogisticRegression_02.png"
