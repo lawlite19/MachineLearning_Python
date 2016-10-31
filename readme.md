@@ -122,14 +122,85 @@ from sklearn.preprocessing import StandardScaler    #引入缩放的包
 - ![{ - \log ({h_\theta }(x))}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7B%20-%20%5Clog%20%28%7Bh_%5Ctheta%20%7D%28x%29%29%7D)的图像如下，即`y=1`时：
 ![enter description here][2]
 
-可以看出，当![{{h_\theta }(x)}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7B%7Bh_%5Ctheta%20%7D%28x%29%7D)趋于`1`，`y=1`,与预测值一致，此时付出的代价`cost`趋于`0`，若![{{h_\theta }(x)}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7B%7Bh_%5Ctheta%20%7D%28x%29%7D)趋于`0`，`y=1`,此时的代价`cost`值非常大，我们最终的目的是最小化带价值代价值
+可以看出，当![{{h_\theta }(x)}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7B%7Bh_%5Ctheta%20%7D%28x%29%7D)趋于`1`，`y=1`,与预测值一致，此时付出的代价`cost`趋于`0`，若![{{h_\theta }(x)}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7B%7Bh_%5Ctheta%20%7D%28x%29%7D)趋于`0`，`y=1`,此时的代价`cost`值非常大，我们最终的目的是最小化代价值
 - 同理![{ - \log (1 - {h_\theta }(x))}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7B%20-%20%5Clog%20%281%20-%20%7Bh_%5Ctheta%20%7D%28x%29%29%7D)的图像如下（`y=0`）：   
 ![enter description here][3]
 
+### 2、梯度
+- 同样对代价函数求偏导：
+![\frac{{\partial J(\theta )}}{{\partial {\theta _j}}} = \frac{1}{m}\sum\limits_{i = 1}^m {[({h_\theta }({x^{(i)}}) - {y^{(i)}})x_j^{(i)}]} ](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%5Cfrac%7B%7B%5Cpartial%20J%28%5Ctheta%20%29%7D%7D%7B%7B%5Cpartial%20%7B%5Ctheta%20_j%7D%7D%7D%20%3D%20%5Cfrac%7B1%7D%7Bm%7D%5Csum%5Climits_%7Bi%20%3D%201%7D%5Em%20%7B%5B%28%7Bh_%5Ctheta%20%7D%28%7Bx%5E%7B%28i%29%7D%7D%29%20-%20%7By%5E%7B%28i%29%7D%7D%29x_j%5E%7B%28i%29%7D%5D%7D%20)   
+可以看出与线性回归的偏导数一致
+- 推到过程
+![enter description here][4]
 
+### 3、正则化
+- 目的是为了防止过拟合
+- 在代价函数中加上一项![\frac{\lambda }{{2m}}\sum\limits_{j = 1}^m {\theta _j^2} ](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%5Cfrac%7B%5Clambda%20%7D%7B%7B2m%7D%7D%5Csum%5Climits_%7Bj%20%3D%201%7D%5Em%20%7B%5Ctheta%20_j%5E2%7D%20)，所以最终的代价函数为：  
+![J(\theta ) =  - \frac{1}{m}\sum\limits_{i = 1}^m {[{y^{(i)}}\log ({h_\theta }({x^{(i)}}) + (1 - } {y^{(i)}})\log (1 - {h_\theta }({x^{(i)}})] + \frac{\lambda }{{2m}}\sum\limits_{j = 1}^m {\theta _j^2} ](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=J%28%5Ctheta%20%29%20%3D%20%20-%20%5Cfrac%7B1%7D%7Bm%7D%5Csum%5Climits_%7Bi%20%3D%201%7D%5Em%20%7B%5B%7By%5E%7B%28i%29%7D%7D%5Clog%20%28%7Bh_%5Ctheta%20%7D%28%7Bx%5E%7B%28i%29%7D%7D%29%20%2B%20%281%20-%20%7D%20%7By%5E%7B%28i%29%7D%7D%29%5Clog%20%281%20-%20%7Bh_%5Ctheta%20%7D%28%7Bx%5E%7B%28i%29%7D%7D%29%5D%20%2B%20%5Cfrac%7B%5Clambda%20%7D%7B%7B2m%7D%7D%5Csum%5Climits_%7Bj%20%3D%201%7D%5Em%20%7B%5Ctheta%20_j%5E2%7D%20)
+- 注意j是重1开始的，因为theta(0)为一个常数项，X中最前面一列会加上1列，所以乘积还是theta(0),feature没有关系，没有必要正则化
+- 正则化后的代价：
+```
+# 代价函数
+def costFunction(initial_theta,X,y,inital_lambda):
+    m = len(y)
+    J = 0
+    
+    h = sigmoid(np.dot(X,initial_theta))    # 计算h(z)
+    theta1 = initial_theta.copy()           # 因为正则化j=1从1开始，不包含0，所以复制一份，前theta(0)值为0 
+    theta1[0] = 0   
+    
+    temp = np.dot(np.transpose(theta1),theta1)
+    J = (-np.dot(np.transpose(y),np.log(h))-np.dot(np.transpose(1-y),np.log(1-h))+temp*inital_lambda/2)/m   # 正则化的代价方程
+    return J
+```
+- 正则化后的代价的梯度
+```
+# 计算梯度
+def gradient(initial_theta,X,y,inital_lambda):
+    m = len(y)
+    grad = np.zeros((initial_theta.shape[0]))
+    
+    h = sigmoid(np.dot(X,initial_theta))# 计算h(z)
+    theta1 = initial_theta.copy()
+    theta1[0] = 0
+
+    grad = np.dot(np.transpose(X),h-y)/m+inital_lambda/m*theta1 #正则化的梯度
+    return grad  
+```
+
+### 4、S型函数（即![{{h_\theta }(x)}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7B%7Bh_%5Ctheta%20%7D%28x%29%7D)）
+- 实现代码：
+```
+# S型函数    
+def sigmoid(z):
+    h = np.zeros((len(z),1))    # 初始化，与z的长度一置
+    
+    h = 1.0/(1.0+np.exp(-z))
+    return h
+```
+
+### 5、映射为多项式
+- 因为数据的feture可能很少，导致偏差大，所以创造出一些feture结合
+- eg:映射为2次方的形式:![1 + {x_1} + {x_2} + x_1^2 + {x_1}{x_2} + x_2^2](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=1%20%2B%20%7Bx_1%7D%20%2B%20%7Bx_2%7D%20%2B%20x_1%5E2%20%2B%20%7Bx_1%7D%7Bx_2%7D%20%2B%20x_2%5E2)
+- 实现代码：
+```
+# 映射为多项式 
+def mapFeature(X1,X2):
+    degree = 3;                     # 映射的最高次方
+    out = np.ones((X1.shape[0],1))  # 映射后的结果数组（取代X）
+    '''
+    这里以degree=2为例，映射为1,x1,x2,x1^2,x1,x2,x2^2
+    '''
+    for i in np.arange(1,degree+1): 
+        for j in range(i+1):
+            temp = X1**(i-j)*(X2**j)    #矩阵直接乘相当于matlab中的点乘.*
+            out = np.hstack((out, temp.reshape(-1,1)))
+    return out
+```
 
 
 
   [1]: ./images/LinearRegression_01.png "LinearRegression_01.png"
   [2]: ./images/LogisticRegression_01.png "LogisticRegression_01.png"
   [3]: ./images/LogisticRegression_02.png "LogisticRegression_02.png"
+  [4]: ./images/LogisticRegression_03.jpg "LogisticRegression_03.jpg"
