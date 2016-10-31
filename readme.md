@@ -108,6 +108,7 @@ from sklearn.preprocessing import StandardScaler    #引入缩放的包
   
 ## 二、逻辑回归
 - [全部代码](/LogisticRegression/LogisticRegression.py)
+
 ### 1、代价函数
 - ![\left\{ \begin{gathered}
   J(\theta ) = \frac{1}{m}\sum\limits_{i = 1}^m {\cos t({h_\theta }({x^{(i)}}),{y^{(i)}})}  \hfill \\
@@ -120,8 +121,9 @@ from sklearn.preprocessing import StandardScaler    #引入缩放的包
 - 为什么不用线性回归的代价函数表示，因为线性回归的代价函数可能是非凸的，对于分类问题，使用梯度下降很难得到最小值，上面的代价函数是凸函数
 - ![{ - \log ({h_\theta }(x))}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7B%20-%20%5Clog%20%28%7Bh_%5Ctheta%20%7D%28x%29%29%7D)的图像如下，即`y=1`时：
 ![enter description here][2]
+
 可以看出，当![{{h_\theta }(x)}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7B%7Bh_%5Ctheta%20%7D%28x%29%7D)趋于`1`，`y=1`,与预测值一致，此时付出的代价`cost`趋于`0`，若![{{h_\theta }(x)}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7B%7Bh_%5Ctheta%20%7D%28x%29%7D)趋于`0`，`y=1`,此时的代价`cost`值非常大，我们最终的目的是最小化带价值代价值
-- 同理![{ - \log (1 - {h_\theta }(x))}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7B%20-%20%5Clog%20%281%20-%20%7Bh_%5Ctheta%20%7D%28x%29%29%7D)的图像如下（`y=0`）：
+- 同理![{ - \log (1 - {h_\theta }(x))}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7B%20-%20%5Clog%20%281%20-%20%7Bh_%5Ctheta%20%7D%28x%29%29%7D)的图像如下（`y=0`）：   
 ![enter description here][3]
 
 
