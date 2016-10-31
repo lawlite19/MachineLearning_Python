@@ -137,7 +137,7 @@ from sklearn.preprocessing import StandardScaler    #引入缩放的包
 - 目的是为了防止过拟合
 - 在代价函数中加上一项![\frac{\lambda }{{2m}}\sum\limits_{j = 1}^m {\theta _j^2} ](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%5Cfrac%7B%5Clambda%20%7D%7B%7B2m%7D%7D%5Csum%5Climits_%7Bj%20%3D%201%7D%5Em%20%7B%5Ctheta%20_j%5E2%7D%20)，所以最终的代价函数为：  
 ![J(\theta ) =  - \frac{1}{m}\sum\limits_{i = 1}^m {[{y^{(i)}}\log ({h_\theta }({x^{(i)}}) + (1 - } {y^{(i)}})\log (1 - {h_\theta }({x^{(i)}})] + \frac{\lambda }{{2m}}\sum\limits_{j = 1}^m {\theta _j^2} ](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=J%28%5Ctheta%20%29%20%3D%20%20-%20%5Cfrac%7B1%7D%7Bm%7D%5Csum%5Climits_%7Bi%20%3D%201%7D%5Em%20%7B%5B%7By%5E%7B%28i%29%7D%7D%5Clog%20%28%7Bh_%5Ctheta%20%7D%28%7Bx%5E%7B%28i%29%7D%7D%29%20%2B%20%281%20-%20%7D%20%7By%5E%7B%28i%29%7D%7D%29%5Clog%20%281%20-%20%7Bh_%5Ctheta%20%7D%28%7Bx%5E%7B%28i%29%7D%7D%29%5D%20%2B%20%5Cfrac%7B%5Clambda%20%7D%7B%7B2m%7D%7D%5Csum%5Climits_%7Bj%20%3D%201%7D%5Em%20%7B%5Ctheta%20_j%5E2%7D%20)
-- 注意j是重1开始的，因为theta(0)为一个常数项，X中最前面一列会加上1列，所以乘积还是theta(0),feature没有关系，没有必要正则化
+- 注意j是重1开始的，因为theta(0)为一个常数项，X中最前面一列会加上1列1，所以乘积还是theta(0),feature没有关系，没有必要正则化
 - 正则化后的代价：
 ```
 # 代价函数
@@ -198,9 +198,31 @@ def mapFeature(X1,X2):
     return out
 ```
 
+### 6、使用`scipy`的优化方法
+- 梯度下降使用`scipy`中`optimize`中的`fmin_bfgs`函数
+- 调用scipy中的优化算法fmin_bfgs（拟牛顿法Broyden-Fletcher-Goldfarb-Shanno
+ - costFunction是自己实现的一个求代价的函数，
+ - initial_theta表示初始化的值,
+ - fprime指定costFunction的梯度
+ - args是其余测参数，以元组的形式传入，最后会将最小化costFunction的theta返回 
+```
+    result = optimize.fmin_bfgs(costFunction, initial_theta, fprime=gradient, args=(X,y,initial_lambda))    
+```   
+
+### 7、运行结果
+- data1决策边界和准确度  
+![enter description here][5]
+![enter description here][6]
+- data2决策边界和准确度  
+![enter description here][7]
+![enter description here][8]
 
 
   [1]: ./images/LinearRegression_01.png "LinearRegression_01.png"
   [2]: ./images/LogisticRegression_01.png "LogisticRegression_01.png"
   [3]: ./images/LogisticRegression_02.png "LogisticRegression_02.png"
   [4]: ./images/LogisticRegression_03.jpg "LogisticRegression_03.jpg"
+  [5]: ./images/LogisticRegression_04.png "LogisticRegression_04.png"
+  [6]: ./images/LogisticRegression_05.png "LogisticRegression_05.png"
+  [7]: ./images/LogisticRegression_06.png "LogisticRegression_06.png"
+  [8]: ./images/LogisticRegression_07.png "LogisticRegression_07.png"

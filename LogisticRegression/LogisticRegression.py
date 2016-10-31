@@ -58,7 +58,7 @@ def plot_data(X,y):
 
 # 映射为多项式 
 def mapFeature(X1,X2):
-    degree = 3;                     # 映射的最高次方
+    degree = 2;                     # 映射的最高次方
     out = np.ones((X1.shape[0],1))  # 映射后的结果数组（取代X）
     '''
     这里以degree=2为例，映射为1,x1,x2,x1^2,x1,x2,x2^2
@@ -75,7 +75,7 @@ def costFunction(initial_theta,X,y,inital_lambda):
     J = 0
     
     h = sigmoid(np.dot(X,initial_theta))    # 计算h(z)
-    theta1 = initial_theta.copy()           # 因为正则化j=1从1开始，不包含0，所以赋值一份，前theta(0)值为0 
+    theta1 = initial_theta.copy()           # 因为正则化j=1从1开始，不包含0，所以复制一份，前theta(0)值为0 
     theta1[0] = 0   
     
     temp = np.dot(np.transpose(theta1),theta1)
