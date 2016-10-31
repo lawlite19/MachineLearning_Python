@@ -217,6 +217,44 @@ def mapFeature(X1,X2):
 ![enter description here][7]
 ![enter description here][8]
 
+### 8、[使用scikit-learn库中的逻辑回归模型实现](/LogisticRegression/LogisticRegression_scikit-learn.py)
+- 导入包
+```
+from sklearn.linear_model import LogisticRegression
+from sklearn.preprocessing import StandardScaler
+from sklearn.cross_validation import train_test_split
+import numpy as np
+```
+- 划分训练集和测试集
+```
+    # 划分为训练集和测试集
+    x_train,x_test,y_train,y_test = train_test_split(X,y,test_size=0.2)
+```
+- 归一化
+```
+    # 归一化
+    scaler = StandardScaler()
+    scaler.fit(x_train)
+    x_train = scaler.fit_transform(x_train)
+    x_test = scaler.fit_transform(x_test)
+```
+- 逻辑回归
+```
+    #逻辑回归
+    model = LogisticRegression()
+    model.fit(x_train,y_train)
+``` 
+- 预测
+```
+    # 预测
+    predict = model.predict(x_test)
+    right = sum(predict == y_test)
+    
+    predict = np.hstack((predict.reshape(-1,1),y_test.reshape(-1,1)))   # 将预测值和真实值放在一块，好观察
+    print predict
+    print ('测试集准确率：%f%%'%(right*100.0/predict.shape[0]))          #计算在测试集上的准确度
+```
+
 
   [1]: ./images/LinearRegression_01.png "LinearRegression_01.png"
   [2]: ./images/LogisticRegression_01.png "LogisticRegression_01.png"
