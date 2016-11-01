@@ -12,8 +12,9 @@ def logisticRegression_OneVsAll():
     X = data['X']   # 获取X数据，每一行对应一个数字20x20px
     y = data['y']
     m,n = X.shape
-    num_labels = 10
+    num_labels = 10 # 数字个数，0-9
     
+    ##　随机显示几行数据
     rand_indices = [t for t in [np.random.randint(x-x, m) for x in range(100)]]  # 生成100个0-m的随机数
     display_data(X[rand_indices,:])     # 显示100个数字
     
@@ -32,36 +33,45 @@ def logisticRegression_OneVsAll():
 def loadmat_data(fileName):
     return spio.loadmat(fileName)
     
-# 显示10个数字
+# 显示100个数字
 def display_data(imgData):
     sum = 0
-    display_array = np.ones((200,200))
+    '''
+    显示100个数（若是一个一个绘制将会非常慢，可以将要画的数字整理好，放到一个矩阵中，显示这个矩阵即可）
+    - 初始化一个二维数组
+    - 将每行的数据调整成图像的矩阵，放进二维数组
+    - 显示即可
+    '''
+    pad = 1
+    display_array = -np.ones((pad+10*(20+pad),pad+10*(20+pad)))
     for i in range(10):
         for j in range(10):
-            display_array[i*20:(i+1)*20,j*20:(j+1)*20] = imgData[sum,:].reshape(20,20)
+            display_array[pad+i*(20+pad):pad+i*(20+pad)+20,pad+j*(20+pad):pad+j*(20+pad)+20] = (imgData[sum,:].reshape(20,20,order="F"))    # order=F指定以列优先，在matlab中是这样的，python中需要指定，默认以行
             sum += 1
             
-    plt.imshow(display_array,cmap='gray')
+    plt.imshow(display_array,cmap='gray')   #显示灰度图像
     plt.axis('off')
     plt.show()
 
-# 求每个分类的theta    
+# 求每个分类的theta，最后返回所有的all_theta    
 def oneVsAll(X,y,num_labels,Lambda):
     # 初始化变量
     m,n = X.shape
-    all_theta = np.zeros((n+1,num_labels))
-    X = np.hstack((np.ones((m,1)),X))
-    class_y = np.zeros((m,num_labels))
-    initial_theta = np.zeros((n+1,1))
+    all_theta = np.zeros((n+1,num_labels))  # 每一列对应相应分类的theta,共10列
+    X = np.hstack((np.ones((m,1)),X))       # X前补上一列1的偏置bias
+    class_y = np.zeros((m,num_labels))      # 数据的y对应0-9，需要映射为0/1的关系
+    initial_theta = np.zeros((n+1,1))       # 初始化一个分类的theta
     
-    # 格式化y，将y两两分类
+    # 映射y
     for i in range(num_labels):
-        class_y[:,i] = np.int32(y==i).reshape(1,-1)
+        class_y[:,i] = np.int32(y==i).reshape(1,-1) # 注意reshape(1,-1)才可以赋值
     
+    #np.savetxt("class_y.csv", class_y[0:600,:], delimiter=',')    
+    
+    '''遍历每个分类，计算对应的theta值'''
     for i in range(num_labels):
-        #all_theta[:,i] = optimize.fmin(costFunction,initial_theta,args=(X,class_y[:,i].reshape(-1,1),Lambda),maxiter=50)
-        result = optimize.fmin_bfgs(costFunction, initial_theta, fprime=gradient, args=(X,class_y[:,i],Lambda))
-        all_theta[:,i] = result.reshape(1,-1)
+        result = optimize.fmin_bfgs(costFunction, initial_theta, fprime=gradient, args=(X,class_y[:,i],Lambda)) # 调用梯度下降的优化方法
+        all_theta[:,i] = result.reshape(1,-1)   # 放入all_theta中
         
     all_theta = np.transpose(all_theta) 
     return all_theta
