@@ -258,7 +258,7 @@ import numpy as np
 
 -------------
 
- ## [逻辑回归_手写数字识别_OneVsAll](/LogisticRegression)
+## [逻辑回归_手写数字识别_OneVsAll](/LogisticRegression)
 - [全部代码](/LogisticRegression/LogisticRegression_OneVsAll.py)
 
 ### 1、随机显示100个数字
