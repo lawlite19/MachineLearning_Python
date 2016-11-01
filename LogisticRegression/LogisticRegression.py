@@ -92,7 +92,7 @@ def gradient(initial_theta,X,y,inital_lambda):
     theta1[0] = 0
 
     grad = np.dot(np.transpose(X),h-y)/m+inital_lambda/m*theta1 #正则化的梯度
-    return grad    
+    return grad
 
 # S型函数    
 def sigmoid(z):
