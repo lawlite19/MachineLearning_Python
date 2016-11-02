@@ -41,6 +41,7 @@ def neuralNetwork(input_layer_size,hidden_layer_size,out_put_layer):
     initial_Theta2 = randInitializeWeights(hidden_layer_size,out_put_layer)
     
     initial_nn_params = np.vstack((initial_Theta1.reshape(-1,1),initial_Theta2.reshape(-1,1)))  #展开theta    
+    np.savetxt("testTheta.csv",initial_nn_params,delimiter=",")
     result = optimize.fmin_cg(nnCostFunction, initial_nn_params, fprime=nnGradient, args=(input_layer_size,hidden_layer_size,out_put_layer,X,y,Lambda))
     print result
     '''可视化 Theta1'''
@@ -176,7 +177,7 @@ def sigmoidGradient(z):
 # 随机初始化权重theta
 def randInitializeWeights(L_in,L_out):
     W = np.zeros((L_out,1+L_in))
-    epsilon_init = (6/(L_out+L_in))**0.5
+    epsilon_init = (6.0/(L_out+L_in))**0.5
     W = np.random.rand(L_out,1+L_in)*2*epsilon_init-epsilon_init
     return W
 
