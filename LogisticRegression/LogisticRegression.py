@@ -20,7 +20,7 @@ def LogisticRegression():
     J = costFunction(initial_theta,X,y,initial_lambda)  #计算一下给定初始化的theta和lambda求出的代价J
     
     print J  #输出一下计算的值，应该为0.693147
-    # result = optimize.fmin(costFunction, initial_theta, args=(X,y,initial_lambda))    #直接使用最小化的方法，效果不好
+    #result = optimize.fmin(costFunction, initial_theta, args=(X,y,initial_lambda))    #直接使用最小化的方法，效果不好
     '''调用scipy中的优化算法fmin_bfgs（拟牛顿法Broyden-Fletcher-Goldfarb-Shanno）
     - costFunction是自己实现的一个求代价的函数，
     - initial_theta表示初始化的值,

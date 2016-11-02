@@ -70,6 +70,7 @@ def oneVsAll(X,y,num_labels,Lambda):
     
     '''遍历每个分类，计算对应的theta值'''
     for i in range(num_labels):
+        #optimize.fmin_cg
         result = optimize.fmin_bfgs(costFunction, initial_theta, fprime=gradient, args=(X,class_y[:,i],Lambda)) # 调用梯度下降的优化方法
         all_theta[:,i] = result.reshape(1,-1)   # 放入all_theta中
         

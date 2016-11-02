@@ -105,6 +105,9 @@ from sklearn.preprocessing import StandardScaler    #引入缩放的包
     #预测结果
     result = model.predict(x_test)
 ```
+
+-------------------
+
   
 ## 二、[逻辑回归](/LogisticRegression)
 - [全部代码](/LogisticRegression/LogisticRegression.py)
@@ -353,7 +356,7 @@ def predict_oneVsAll(all_theta,X):
 ```
 
 ### 5、运行结果
-- 10次分类，在训练集上的准确度：
+- 10次分类，在训练集上的准确度：   
 ![enter description here][13]
 
 ### 6、[使用scikit-learn库中的逻辑回归模型实现](/LogisticRegression/LogisticRegression_OneVsAll_scikit-learn.py)
@@ -384,6 +387,12 @@ from sklearn.linear_model import LogisticRegression
 ```
 - 5、输出结果（在训练集上的准确度）
 ![enter description here][14]
+
+
+----------
+
+## 三、神经网络
+
 
 
   [1]: ./images/LinearRegression_01.png "LinearRegression_01.png"
