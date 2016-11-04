@@ -403,17 +403,9 @@ from sklearn.linear_model import LogisticRegression
 
 - 所以可以得到：
  - 隐含层：  
-![\begin{gathered}
-  a_1^{(2)} = g(\theta _{10}^{(1)}{x_0} + \theta _{11}^{(1)}{x_1} + \theta _{12}^{(1)}{x_2} + \theta _{13}^{(1)}{x_3}) \hfill \\
-  a_2^{(2)} = g(\theta _{20}^{(1)}{x_0} + \theta _{21}^{(1)}{x_1} + \theta _{22}^{(1)}{x_2} + \theta _{23}^{(1)}{x_3}) \hfill \\
-  a_3^{(2)} = g(\theta _{30}^{(1)}{x_0} + \theta _{31}^{(1)}{x_1} + \theta _{32}^{(1)}{x_2} + \theta _{33}^{(1)}{x_3}) \hfill \\ 
-\end{gathered} ](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%5Cbegin%7Bgathered%7D%0A%20%20a_1%5E%7B%282%29%7D%20%3D%20g%28%5Ctheta%20_%7B10%7D%5E%7B%281%29%7D%7Bx_0%7D%20%2B%20%5Ctheta%20_%7B11%7D%5E%7B%281%29%7D%7Bx_1%7D%20%2B%20%5Ctheta%20_%7B12%7D%5E%7B%281%29%7D%7Bx_2%7D%20%2B%20%5Ctheta%20_%7B13%7D%5E%7B%281%29%7D%7Bx_3%7D%29%20%5Chfill%20%5C%5C%0A%20%20a_2%5E%7B%282%29%7D%20%3D%20g%28%5Ctheta%20_%7B20%7D%5E%7B%281%29%7D%7Bx_0%7D%20%2B%20%5Ctheta%20_%7B21%7D%5E%7B%281%29%7D%7Bx_1%7D%20%2B%20%5Ctheta%20_%7B22%7D%5E%7B%281%29%7D%7Bx_2%7D%20%2B%20%5Ctheta%20_%7B23%7D%5E%7B%281%29%7D%7Bx_3%7D%29%20%5Chfill%20%5C%5C%0A%20%20a_3%5E%7B%282%29%7D%20%3D%20g%28%5Ctheta%20_%7B30%7D%5E%7B%281%29%7D%7Bx_0%7D%20%2B%20%5Ctheta%20_%7B31%7D%5E%7B%281%29%7D%7Bx_1%7D%20%2B%20%5Ctheta%20_%7B32%7D%5E%7B%281%29%7D%7Bx_2%7D%20%2B%20%5Ctheta%20_%7B33%7D%5E%7B%281%29%7D%7Bx_3%7D%29%20%5Chfill%20%5C%5C%20%0A%5Cend%7Bgathered%7D%20)
+![a_1^{(2)} = g(\theta _{10}^{(1)}{x_0} + \theta _{11}^{(1)}{x_1} + \theta _{12}^{(1)}{x_2} + \theta _{13}^{(1)}{x_3})](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=a_1%5E%7B%282%29%7D%20%3D%20g%28%5Ctheta%20_%7B10%7D%5E%7B%281%29%7D%7Bx_0%7D%20%2B%20%5Ctheta%20_%7B11%7D%5E%7B%281%29%7D%7Bx_1%7D%20%2B%20%5Ctheta%20_%7B12%7D%5E%7B%281%29%7D%7Bx_2%7D%20%2B%20%5Ctheta%20_%7B13%7D%5E%7B%281%29%7D%7Bx_3%7D%29)
  - 输出层   
-![\begin{gathered}
-  a_1^{(2)} = g(\theta _{10}^{(1)}{x_0} + \theta _{11}^{(1)}{x_1} + \theta _{12}^{(1)}{x_2} + \theta _{13}^{(1)}{x_3}) \hfill \\
-  a_2^{(2)} = g(\theta _{20}^{(1)}{x_0} + \theta _{21}^{(1)}{x_1} + \theta _{22}^{(1)}{x_2} + \theta _{23}^{(1)}{x_3}) \hfill \\
-  a_3^{(2)} = g(\theta _{30}^{(1)}{x_0} + \theta _{31}^{(1)}{x_1} + \theta _{32}^{(1)}{x_2} + \theta _{33}^{(1)}{x_3}) \hfill \\ 
-\end{gathered} ](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%5Cbegin%7Bgathered%7D%0A%20%20a_1%5E%7B%282%29%7D%20%3D%20g%28%5Ctheta%20_%7B10%7D%5E%7B%281%29%7D%7Bx_0%7D%20%2B%20%5Ctheta%20_%7B11%7D%5E%7B%281%29%7D%7Bx_1%7D%20%2B%20%5Ctheta%20_%7B12%7D%5E%7B%281%29%7D%7Bx_2%7D%20%2B%20%5Ctheta%20_%7B13%7D%5E%7B%281%29%7D%7Bx_3%7D%29%20%5Chfill%20%5C%5C%0A%20%20a_2%5E%7B%282%29%7D%20%3D%20g%28%5Ctheta%20_%7B20%7D%5E%7B%281%29%7D%7Bx_0%7D%20%2B%20%5Ctheta%20_%7B21%7D%5E%7B%281%29%7D%7Bx_1%7D%20%2B%20%5Ctheta%20_%7B22%7D%5E%7B%281%29%7D%7Bx_2%7D%20%2B%20%5Ctheta%20_%7B23%7D%5E%7B%281%29%7D%7Bx_3%7D%29%20%5Chfill%20%5C%5C%0A%20%20a_3%5E%7B%282%29%7D%20%3D%20g%28%5Ctheta%20_%7B30%7D%5E%7B%281%29%7D%7Bx_0%7D%20%2B%20%5Ctheta%20_%7B31%7D%5E%7B%281%29%7D%7Bx_1%7D%20%2B%20%5Ctheta%20_%7B32%7D%5E%7B%281%29%7D%7Bx_2%7D%20%2B%20%5Ctheta%20_%7B33%7D%5E%7B%281%29%7D%7Bx_3%7D%29%20%5Chfill%20%5C%5C%20%0A%5Cend%7Bgathered%7D%20)
+![{h_\theta }(x) = a_1^{(3)} = g(\theta _{10}^{(2)}a_0^{(2)} + \theta _{11}^{(2)}a_1^{(2)} + \theta _{12}^{(2)}a_2^{(2)} + \theta _{13}^{(2)}a_3^{(2)})](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7Bh_%5Ctheta%20%7D%28x%29%20%3D%20a_1%5E%7B%283%29%7D%20%3D%20g%28%5Ctheta%20_%7B10%7D%5E%7B%282%29%7Da_0%5E%7B%282%29%7D%20%2B%20%5Ctheta%20_%7B11%7D%5E%7B%282%29%7Da_1%5E%7B%282%29%7D%20%2B%20%5Ctheta%20_%7B12%7D%5E%7B%282%29%7Da_2%5E%7B%282%29%7D%20%2B%20%5Ctheta%20_%7B13%7D%5E%7B%282%29%7Da_3%5E%7B%282%29%7D%29)
 
 
 
