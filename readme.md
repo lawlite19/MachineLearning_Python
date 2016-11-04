@@ -419,19 +419,10 @@ from sklearn.linear_model import LogisticRegression
 ### 3、正则化
 - `L`-->所有层的个数
 - ![{S_l}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7BS_l%7D)-->第`l`层unit的个数
-- 正则化后的**代价函数**为
-![J(\Theta ) =  - \frac{1}{m}\sum\limits_{i = 1}^m {\sum\limits_{k = 1}^K {[y_k^{(i)}\log {{({h_\Theta }({x^{(i)}}))}_k}} }  + (1 - y_k^{(i)})\log {(1 - {h_\Theta }({x^{(i)}}))_k}] + \frac{\lambda }{{2m}}\sum\limits_{l = 1}^{L - 1} {\sum\limits_{i = 1}^{{S_l}} {\sum\limits_{j = 1}^{{S_{l + 1}}} {{{(\theta _{ij}^{(l)})}^2}} } } ](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=J%28%5CTheta%20%29%20%3D%20%20-%20%5Cfrac%7B1%7D%7Bm%7D%5Csum%5Climits_%7Bi%20%3D%201%7D%5Em%20%7B%5Csum%5Climits_%7Bk%20%3D%201%7D%5EK%20%7B%5By_k%5E%7B%28i%29%7D%5Clog%20%7B%7B%28%7Bh_%5CTheta%20%7D%28%7Bx%5E%7B%28i%29%7D%7D%29%29%7D_k%7D%7D%20%7D%20%20%2B%20%281%20-%20y_k%5E%7B%28i%29%7D%29%5Clog%20%7B%281%20-%20%7Bh_%5CTheta%20%7D%28%7Bx%5E%7B%28i%29%7D%7D%29%29_k%7D%5D%20%2B%20%5Cfrac%7B%5Clambda%20%7D%7B%7B2m%7D%7D%5Csum%5Climits_%7Bl%20%3D%201%7D%5E%7BL%20-%201%7D%20%7B%5Csum%5Climits_%7Bi%20%3D%201%7D%5E%7B%7BS_l%7D%7D%20%7B%5Csum%5Climits_%7Bj%20%3D%201%7D%5E%7B%7BS_%7Bl%20%2B%201%7D%7D%7D%20%7B%7B%7B%28%5Ctheta%20_%7Bij%7D%5E%7B%28l%29%7D%29%7D%5E2%7D%7D%20%7D%20%7D%20)
+- 正则化后的**代价函数**为  
+![enter description here][16]
  - ![\theta ](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%5Ctheta%20)共有`L-1`层，
- - 然后是对应每一层的theta矩阵，注意不包含加上偏置项对应的theta(0)
-
-
-
-
-
-
-
-
-
+ - 然后是累加对应每一层的theta矩阵，注意不包含加上偏置项对应的theta(0)
 
 
   [1]: ./images/LinearRegression_01.png "LinearRegression_01.png"
@@ -449,3 +440,4 @@ from sklearn.linear_model import LogisticRegression
   [13]: ./images/LogisticRegression_12.png "LogisticRegression_12.png"
   [14]: ./images/LogisticRegression_13.png "LogisticRegression_13.png"
   [15]: ./images/NeuralNetwork_01.png "NeuralNetwork_01.png"
+  [16]: ./images/NeuralNetwork_02.png "NeuralNetwork_02.png"
