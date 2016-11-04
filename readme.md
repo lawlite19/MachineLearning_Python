@@ -424,6 +424,26 @@ from sklearn.linear_model import LogisticRegression
  - ![\theta ](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%5Ctheta%20)共有`L-1`层，
  - 然后是累加对应每一层的theta矩阵，注意不包含加上偏置项对应的theta(0)
 
+### 4、反向传播BP
+- 上面正向传播可以计算得到`J(θ)`,使用梯度下降法还需要求它的梯度
+- BP反向传播的目的就是求代价函数的梯度
+- 假设4层的神经网络,![\delta _{\text{j}}^{(l)}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%5Cdelta%20_%7B%5Ctext%7Bj%7D%7D%5E%7B%28l%29%7D)记为-->`l`层第`j`个单元的误差
+ - ![\delta _{\text{j}}^{(4)} = a_j^{(4)} - {y_i}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%5Cdelta%20_%7B%5Ctext%7Bj%7D%7D%5E%7B%284%29%7D%20%3D%20a_j%5E%7B%284%29%7D%20-%20%7By_i%7D)《===》![{\delta ^{(4)}} = {a^{(4)}} - y](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7B%5Cdelta%20%5E%7B%284%29%7D%7D%20%3D%20%7Ba%5E%7B%284%29%7D%7D%20-%20y)（向量化）
+ - ![{\delta ^{(3)}} = {({\theta ^{(3)}})^T}{\delta ^{(4)}}.*{g^}({a^{(3)}})](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7B%5Cdelta%20%5E%7B%283%29%7D%7D%20%3D%20%7B%28%7B%5Ctheta%20%5E%7B%283%29%7D%7D%29%5ET%7D%7B%5Cdelta%20%5E%7B%284%29%7D%7D.%2A%7Bg%5E%7D%28%7Ba%5E%7B%283%29%7D%7D%29)
+ - ![{\delta ^{(2)}} = {({\theta ^{(2)}})^T}{\delta ^{(3)}}.*{g^}({a^{(2)}})](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7B%5Cdelta%20%5E%7B%282%29%7D%7D%20%3D%20%7B%28%7B%5Ctheta%20%5E%7B%282%29%7D%7D%29%5ET%7D%7B%5Cdelta%20%5E%7B%283%29%7D%7D.%2A%7Bg%5E%7D%28%7Ba%5E%7B%282%29%7D%7D%29)
+ - 没有![{\delta ^{(1)}}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7B%5Cdelta%20%5E%7B%281%29%7D%7D)，因为对于输入没有误差
+- 因为S型函数![{\text{g(z)}}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7B%5Ctext%7Bg%28z%29%7D%7D)的倒数为：![{g^}(z){\text{ = g(z)(1 - g(z))}}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7Bg%5E%7D%28z%29%7B%5Ctext%7B%20%3D%20g%28z%29%281%20-%20g%28z%29%29%7D%7D)，所以上面的![{g^}({a^{(3)}})](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7Bg%5E%7D%28%7Ba%5E%7B%283%29%7D%7D%29)和![{g^}({a^{(2)}})](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7Bg%5E%7D%28%7Ba%5E%7B%282%29%7D%7D%29)可以在前向传播中计算出来
+
+- 反向传播计算梯度的过程为：
+ - ![\Delta _{ij}^{(l)} = 0](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%5CDelta%20_%7Bij%7D%5E%7B%28l%29%7D%20%3D%200)（![\Delta ](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%5CDelta%20)是大写的![\delta ](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%5Cdelta%20)）
+ - for i=1:m:
+ ![{a^{(1)}} = {x^{(i)}}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7Ba%5E%7B%281%29%7D%7D%20%3D%20%7Bx%5E%7B%28i%29%7D%7D)
+正向传播计算![{a^{(l)}}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7Ba%5E%7B%28l%29%7D%7D)（l=2,3,4...L）
+反向计算![{\delta ^{(L)}}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7B%5Cdelta%20%5E%7B%28L%29%7D%7D)、![{\delta ^{(L - 1)}}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7B%5Cdelta%20%5E%7B%28L%20-%201%29%7D%7D)...![{\delta ^{(2)}}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7B%5Cdelta%20%5E%7B%282%29%7D%7D)
+![\Delta _{ij}^{(l)} = \Delta _{ij}^{(l)} + a_j^{(l)}{\delta ^{(l + 1)}}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%5CDelta%20_%7Bij%7D%5E%7B%28l%29%7D%20%3D%20%5CDelta%20_%7Bij%7D%5E%7B%28l%29%7D%20%2B%20a_j%5E%7B%28l%29%7D%7B%5Cdelta%20%5E%7B%28l%20%2B%201%29%7D%7D)
+
+
+
 
   [1]: ./images/LinearRegression_01.png "LinearRegression_01.png"
   [2]: ./images/LogisticRegression_01.png "LogisticRegression_01.png"
