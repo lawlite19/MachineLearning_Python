@@ -8,17 +8,17 @@ font = FontProperties(fname=r"c:\windows\fonts\simsun.ttc", size=14)    # 解决
 
 from sklearn import datasets
 from sklearn.preprocessing import StandardScaler
+import time
 
 def neuralNetwork(input_layer_size,hidden_layer_size,out_put_layer):
     data_img = loadmat_data("data_digits.mat")
-    #data_weights = loadmat_data("weights.mat")
     X = data_img['X']
     y = data_img['y']
-    #Theta1 = data_weights['Theta1'] 
-    #Theta2 = data_weights['Theta2']
+
+    '''scaler = StandardScaler()
+    scaler.fit(X)
+    X = scaler.transform(X)'''    
     
-    
-    #y = np.ravel(y)
     m,n = X.shape
     """digits = datasets.load_digits()
     X = digits.data
@@ -36,13 +36,15 @@ def neuralNetwork(input_layer_size,hidden_layer_size,out_put_layer):
     #nn_params = np.vstack((Theta1.reshape(-1,1),Theta2.reshape(-1,1)))
     
     Lambda = 1
-
+    
     initial_Theta1 = randInitializeWeights(input_layer_size,hidden_layer_size); 
     initial_Theta2 = randInitializeWeights(hidden_layer_size,out_put_layer)
     
     initial_nn_params = np.vstack((initial_Theta1.reshape(-1,1),initial_Theta2.reshape(-1,1)))  #展开theta    
-    np.savetxt("testTheta.csv",initial_nn_params,delimiter=",")
+    #np.savetxt("testTheta.csv",initial_nn_params,delimiter=",")
+    start = time.time()
     result = optimize.fmin_cg(nnCostFunction, initial_nn_params, fprime=nnGradient, args=(input_layer_size,hidden_layer_size,out_put_layer,X,y,Lambda))
+    print time.time()-start
     print result
     '''可视化 Theta1'''
     length = result.shape[0]
@@ -181,6 +183,46 @@ def randInitializeWeights(L_in,L_out):
     W = np.random.rand(L_out,1+L_in)*2*epsilon_init-epsilon_init
     return W
 
+
+# 检验梯度是否计算正确
+def checkGradient(Lambda = 0):
+    input_layer_size = 3
+    hidden_layer_size = 5
+    num_labels = 3
+    m = 5
+    initial_Theta1 = debugInitializeWeights(input_layer_size,hidden_layer_size); 
+    initial_Theta2 = debugInitializeWeights(hidden_layer_size,num_labels)
+    X = debugInitializeWeights(input_layer_size-1,m)
+    y = 1+np.transpose(np.mod(np.arange(1,m+1), num_labels))# 初始化y
+    
+    y = y.reshape(-1,1)
+    nn_params = np.vstack((initial_Theta1.reshape(-1,1),initial_Theta2.reshape(-1,1)))  #展开theta 
+    grad = nnGradient(nn_params, input_layer_size, hidden_layer_size, 
+                     num_labels, X, y, Lambda)
+    
+    num_grad = np.zeros((nn_params.shape[0]))
+    step = np.zeros((nn_params.shape[0]))
+    e = 1e-4
+    for i in range(nn_params.shape[0]):
+        step[i] = e
+        loss1 = nnCostFunction(nn_params-step.reshape(-1,1), input_layer_size, hidden_layer_size, 
+                              num_labels, X, y, 
+                              Lambda)
+        loss2 = nnCostFunction(nn_params+step.reshape(-1,1), input_layer_size, hidden_layer_size, 
+                              num_labels, X, y, 
+                              Lambda)
+        num_grad[i] = (loss2-loss1)/(2*e)
+        step[i]=0
+    res = np.hstack((num_grad.reshape(-1,1),grad.reshape(-1,1)))
+    print res
+
+# 初始化调试的theta权重
+def debugInitializeWeights(fan_in,fan_out):
+    W = np.zeros((fan_out,fan_in+1))
+    x = np.arange(1,fan_out*(fan_in+1)+1)
+    W = np.sin(x).reshape(W.shape)/10
+    return W
+
 # 预测
 def predict(Theta1,Theta2,X):
     m = X.shape[0]
@@ -205,4 +247,5 @@ def predict(Theta1,Theta2,X):
     return p    
 
 if __name__ == "__main__":
-    neuralNetwork(400, 25, 10)
+    checkGradient()
+    #neuralNetwork(400, 25, 10)

@@ -391,7 +391,18 @@ from sklearn.linear_model import LogisticRegression
 
 ----------
 
-## 三、神经网络
+## 三、BP神经网络
+- [全部代码](/NeuralNetwok/NeuralNetwork.py)
+
+### 1、神经网络model
+- 先介绍个三层的神经网络，如下图所示
+ - 输入层（input layer）有三个units（![{x_0}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7Bx_0%7D)为补上的bias，通常设为`1`）
+ - ![a_i^{(j)}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=a_i%5E%7B%28j%29%7D)表示第`j`层的第`i`个激励，也称为为单元unit
+ - ![{\theta ^{(j)}}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7B%5Ctheta%20%5E%7B%28j%29%7D%7D)为第`j`层带第`j+1`层映射的权重矩阵，就是每条边的权重
+![enter description here][15]
+
+- 所以可以得到：
+
 
 
 
@@ -409,3 +420,4 @@ from sklearn.linear_model import LogisticRegression
   [12]: ./images/LogisticRegression_10.png "LogisticRegression_10.png"
   [13]: ./images/LogisticRegression_12.png "LogisticRegression_12.png"
   [14]: ./images/LogisticRegression_13.png "LogisticRegression_13.png"
+  [15]: ./images/NeuralNetwork_01.png "NeuralNetwork_01.png"
