@@ -407,9 +407,24 @@ from sklearn.linear_model import LogisticRegression
 ![a_2^{(2)} = g(\theta _{20}^{(1)}{x_0} + \theta _{21}^{(1)}{x_1} + \theta _{22}^{(1)}{x_2} + \theta _{23}^{(1)}{x_3})](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=a_2%5E%7B%282%29%7D%20%3D%20g%28%5Ctheta%20_%7B20%7D%5E%7B%281%29%7D%7Bx_0%7D%20%2B%20%5Ctheta%20_%7B21%7D%5E%7B%281%29%7D%7Bx_1%7D%20%2B%20%5Ctheta%20_%7B22%7D%5E%7B%281%29%7D%7Bx_2%7D%20%2B%20%5Ctheta%20_%7B23%7D%5E%7B%281%29%7D%7Bx_3%7D%29)   
 ![a_3^{(2)} = g(\theta _{30}^{(1)}{x_0} + \theta _{31}^{(1)}{x_1} + \theta _{32}^{(1)}{x_2} + \theta _{33}^{(1)}{x_3})](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=a_3%5E%7B%282%29%7D%20%3D%20g%28%5Ctheta%20_%7B30%7D%5E%7B%281%29%7D%7Bx_0%7D%20%2B%20%5Ctheta%20_%7B31%7D%5E%7B%281%29%7D%7Bx_1%7D%20%2B%20%5Ctheta%20_%7B32%7D%5E%7B%281%29%7D%7Bx_2%7D%20%2B%20%5Ctheta%20_%7B33%7D%5E%7B%281%29%7D%7Bx_3%7D%29)
  - 输出层   
-![{h_\theta }(x) = a_1^{(3)} = g(\theta _{10}^{(2)}a_0^{(2)} + \theta _{11}^{(2)}a_1^{(2)} + \theta _{12}^{(2)}a_2^{(2)} + \theta _{13}^{(2)}a_3^{(2)})](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7Bh_%5Ctheta%20%7D%28x%29%20%3D%20a_1%5E%7B%283%29%7D%20%3D%20g%28%5Ctheta%20_%7B10%7D%5E%7B%282%29%7Da_0%5E%7B%282%29%7D%20%2B%20%5Ctheta%20_%7B11%7D%5E%7B%282%29%7Da_1%5E%7B%282%29%7D%20%2B%20%5Ctheta%20_%7B12%7D%5E%7B%282%29%7Da_2%5E%7B%282%29%7D%20%2B%20%5Ctheta%20_%7B13%7D%5E%7B%282%29%7Da_3%5E%7B%282%29%7D%29)
+![{h_\theta }(x) = a_1^{(3)} = g(\theta _{10}^{(2)}a_0^{(2)} + \theta _{11}^{(2)}a_1^{(2)} + \theta _{12}^{(2)}a_2^{(2)} + \theta _{13}^{(2)}a_3^{(2)})](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7Bh_%5Ctheta%20%7D%28x%29%20%3D%20a_1%5E%7B%283%29%7D%20%3D%20g%28%5Ctheta%20_%7B10%7D%5E%7B%282%29%7Da_0%5E%7B%282%29%7D%20%2B%20%5Ctheta%20_%7B11%7D%5E%7B%282%29%7Da_1%5E%7B%282%29%7D%20%2B%20%5Ctheta%20_%7B12%7D%5E%7B%282%29%7Da_2%5E%7B%282%29%7D%20%2B%20%5Ctheta%20_%7B13%7D%5E%7B%282%29%7Da_3%5E%7B%282%29%7D%29) 其中，**S型函数**![g(z) = \frac{1}{{1 + {e^{ - z}}}}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=g%28z%29%20%3D%20%5Cfrac%7B1%7D%7B%7B1%20%2B%20%7Be%5E%7B%20-%20z%7D%7D%7D%7D)，也成为**激励函数**
 - 可以看出![{\theta ^{(1)}}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7B%5Ctheta%20%5E%7B%281%29%7D%7D) 为3x4的矩阵，![{\theta ^{(2)}}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7B%5Ctheta%20%5E%7B%282%29%7D%7D)为1x4的矩阵
  - ![{\theta ^{(j)}}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7B%5Ctheta%20%5E%7B%28j%29%7D%7D) ==》`j+1`的单元数x（`j`层的单元数+1）
+
+### 2、代价函数
+- 假设最后输出的![{h_\Theta }(x) \in {R^K}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7Bh_%5CTheta%20%7D%28x%29%20%5Cin%20%7BR%5EK%7D)，即代表输出层有K个单元
+- ![J(\Theta ) =  - \frac{1}{m}\sum\limits_{i = 1}^m {\sum\limits_{k = 1}^K {[y_k^{(i)}\log {{({h_\Theta }({x^{(i)}}))}_k}} }  + (1 - y_k^{(i)})\log {(1 - {h_\Theta }({x^{(i)}}))_k}]](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=J%28%5CTheta%20%29%20%3D%20%20-%20%5Cfrac%7B1%7D%7Bm%7D%5Csum%5Climits_%7Bi%20%3D%201%7D%5Em%20%7B%5Csum%5Climits_%7Bk%20%3D%201%7D%5EK%20%7B%5By_k%5E%7B%28i%29%7D%5Clog%20%7B%7B%28%7Bh_%5CTheta%20%7D%28%7Bx%5E%7B%28i%29%7D%7D%29%29%7D_k%7D%7D%20%7D%20%20%2B%20%281%20-%20y_k%5E%7B%28i%29%7D%29%5Clog%20%7B%281%20-%20%7Bh_%5CTheta%20%7D%28%7Bx%5E%7B%28i%29%7D%7D%29%29_k%7D%5D) 其中，![{({h_\Theta }(x))_i}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7B%28%7Bh_%5CTheta%20%7D%28x%29%29_i%7D)代表第`i`个单元输出
+- 与逻辑回归的代价函数差不多，就是累加上每个输出
+
+
+
+
+
+
+
+
+
+
 
 
 
