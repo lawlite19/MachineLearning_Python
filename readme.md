@@ -398,10 +398,22 @@ from sklearn.linear_model import LogisticRegression
 - 先介绍个三层的神经网络，如下图所示
  - 输入层（input layer）有三个units（![{x_0}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7Bx_0%7D)为补上的bias，通常设为`1`）
  - ![a_i^{(j)}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=a_i%5E%7B%28j%29%7D)表示第`j`层的第`i`个激励，也称为为单元unit
- - ![{\theta ^{(j)}}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7B%5Ctheta%20%5E%7B%28j%29%7D%7D)为第`j`层带第`j+1`层映射的权重矩阵，就是每条边的权重
+ - ![{\theta ^{(j)}}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7B%5Ctheta%20%5E%7B%28j%29%7D%7D)为第`j`层到第`j+1`层映射的权重矩阵，就是每条边的权重
 ![enter description here][15]
 
 - 所以可以得到：
+ - 隐含层：  
+![\begin{gathered}
+  a_1^{(2)} = g(\theta _{10}^{(1)}{x_0} + \theta _{11}^{(1)}{x_1} + \theta _{12}^{(1)}{x_2} + \theta _{13}^{(1)}{x_3}) \hfill \\
+  a_2^{(2)} = g(\theta _{20}^{(1)}{x_0} + \theta _{21}^{(1)}{x_1} + \theta _{22}^{(1)}{x_2} + \theta _{23}^{(1)}{x_3}) \hfill \\
+  a_3^{(2)} = g(\theta _{30}^{(1)}{x_0} + \theta _{31}^{(1)}{x_1} + \theta _{32}^{(1)}{x_2} + \theta _{33}^{(1)}{x_3}) \hfill \\ 
+\end{gathered} ](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%5Cbegin%7Bgathered%7D%0A%20%20a_1%5E%7B%282%29%7D%20%3D%20g%28%5Ctheta%20_%7B10%7D%5E%7B%281%29%7D%7Bx_0%7D%20%2B%20%5Ctheta%20_%7B11%7D%5E%7B%281%29%7D%7Bx_1%7D%20%2B%20%5Ctheta%20_%7B12%7D%5E%7B%281%29%7D%7Bx_2%7D%20%2B%20%5Ctheta%20_%7B13%7D%5E%7B%281%29%7D%7Bx_3%7D%29%20%5Chfill%20%5C%5C%0A%20%20a_2%5E%7B%282%29%7D%20%3D%20g%28%5Ctheta%20_%7B20%7D%5E%7B%281%29%7D%7Bx_0%7D%20%2B%20%5Ctheta%20_%7B21%7D%5E%7B%281%29%7D%7Bx_1%7D%20%2B%20%5Ctheta%20_%7B22%7D%5E%7B%281%29%7D%7Bx_2%7D%20%2B%20%5Ctheta%20_%7B23%7D%5E%7B%281%29%7D%7Bx_3%7D%29%20%5Chfill%20%5C%5C%0A%20%20a_3%5E%7B%282%29%7D%20%3D%20g%28%5Ctheta%20_%7B30%7D%5E%7B%281%29%7D%7Bx_0%7D%20%2B%20%5Ctheta%20_%7B31%7D%5E%7B%281%29%7D%7Bx_1%7D%20%2B%20%5Ctheta%20_%7B32%7D%5E%7B%281%29%7D%7Bx_2%7D%20%2B%20%5Ctheta%20_%7B33%7D%5E%7B%281%29%7D%7Bx_3%7D%29%20%5Chfill%20%5C%5C%20%0A%5Cend%7Bgathered%7D%20)
+ - 输出层   
+![\begin{gathered}
+  a_1^{(2)} = g(\theta _{10}^{(1)}{x_0} + \theta _{11}^{(1)}{x_1} + \theta _{12}^{(1)}{x_2} + \theta _{13}^{(1)}{x_3}) \hfill \\
+  a_2^{(2)} = g(\theta _{20}^{(1)}{x_0} + \theta _{21}^{(1)}{x_1} + \theta _{22}^{(1)}{x_2} + \theta _{23}^{(1)}{x_3}) \hfill \\
+  a_3^{(2)} = g(\theta _{30}^{(1)}{x_0} + \theta _{31}^{(1)}{x_1} + \theta _{32}^{(1)}{x_2} + \theta _{33}^{(1)}{x_3}) \hfill \\ 
+\end{gathered} ](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%5Cbegin%7Bgathered%7D%0A%20%20a_1%5E%7B%282%29%7D%20%3D%20g%28%5Ctheta%20_%7B10%7D%5E%7B%281%29%7D%7Bx_0%7D%20%2B%20%5Ctheta%20_%7B11%7D%5E%7B%281%29%7D%7Bx_1%7D%20%2B%20%5Ctheta%20_%7B12%7D%5E%7B%281%29%7D%7Bx_2%7D%20%2B%20%5Ctheta%20_%7B13%7D%5E%7B%281%29%7D%7Bx_3%7D%29%20%5Chfill%20%5C%5C%0A%20%20a_2%5E%7B%282%29%7D%20%3D%20g%28%5Ctheta%20_%7B20%7D%5E%7B%281%29%7D%7Bx_0%7D%20%2B%20%5Ctheta%20_%7B21%7D%5E%7B%281%29%7D%7Bx_1%7D%20%2B%20%5Ctheta%20_%7B22%7D%5E%7B%281%29%7D%7Bx_2%7D%20%2B%20%5Ctheta%20_%7B23%7D%5E%7B%281%29%7D%7Bx_3%7D%29%20%5Chfill%20%5C%5C%0A%20%20a_3%5E%7B%282%29%7D%20%3D%20g%28%5Ctheta%20_%7B30%7D%5E%7B%281%29%7D%7Bx_0%7D%20%2B%20%5Ctheta%20_%7B31%7D%5E%7B%281%29%7D%7Bx_1%7D%20%2B%20%5Ctheta%20_%7B32%7D%5E%7B%281%29%7D%7Bx_2%7D%20%2B%20%5Ctheta%20_%7B33%7D%5E%7B%281%29%7D%7Bx_3%7D%29%20%5Chfill%20%5C%5C%20%0A%5Cend%7Bgathered%7D%20)
 
 
 
