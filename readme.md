@@ -625,15 +625,15 @@ def predict(Theta1,Theta2,X):
 ```
 
 ### 9、输出结果
-- 梯度检查：
+- 梯度检查：     
 ![enter description here][19]
-- 随机显示100个手写数字
+- 随机显示100个手写数字     
 ![enter description here][20]
-- 显示theta1权重
+- 显示theta1权重     
 ![enter description here][21]
-- 训练集预测准确度
+- 训练集预测准确度     
 ![enter description here][22]
-- 归一化后训练集预测准确度
+- 归一化后训练集预测准确度     
 ![enter description here][23]
 
 
