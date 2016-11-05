@@ -633,6 +633,8 @@ def predict(Theta1,Theta2,X):
 ![enter description here][21]
 - 训练集预测准确度
 ![enter description here][22]
+- 归一化后训练集预测准确度
+![enter description here][23]
 
 
   [1]: ./images/LinearRegression_01.png "LinearRegression_01.png"
@@ -657,3 +659,4 @@ def predict(Theta1,Theta2,X):
   [20]: ./images/NeuralNetwork_06.png "NeuralNetwork_06.png"
   [21]: ./images/NeuralNetwork_07.png "NeuralNetwork_07.png"
   [22]: ./images/NeuralNetwork_08.png "NeuralNetwork_08.png"
+  [23]: ./images/NeuralNetwork_09.png "NeuralNetwork_09.png"

@@ -15,9 +15,9 @@ def neuralNetwork(input_layer_size,hidden_layer_size,out_put_layer):
     X = data_img['X']
     y = data_img['y']
 
-    scaler = StandardScaler()
+    '''scaler = StandardScaler()
     scaler.fit(X)
-    X = scaler.transform(X)  
+    X = scaler.transform(X)'''  
     
     m,n = X.shape
     """digits = datasets.load_digits()
@@ -44,7 +44,7 @@ def neuralNetwork(input_layer_size,hidden_layer_size,out_put_layer):
     #np.savetxt("testTheta.csv",initial_nn_params,delimiter=",")
     start = time.time()
     result = optimize.fmin_cg(nnCostFunction, initial_nn_params, fprime=nnGradient, args=(input_layer_size,hidden_layer_size,out_put_layer,X,y,Lambda))
-    print '执行时间：',time.time()-start
+    print u'执行时间：',time.time()-start
     print result
     '''可视化 Theta1'''
     length = result.shape[0]
