@@ -534,7 +534,7 @@ def nnGradient(nn_params,input_layer_size,hidden_layer_size,num_labels,X,y,Lambd
 - 因为下一层的单元利用上一层的单元作为输入进行计算
 - 大体的推导过程如下，最终我们是想预测函数与已知的`y`非常接近，求均方差的梯度沿着此梯度方向可使代价函数最小化。可对照上面求梯度的过程。
 ![enter description here][17]
-- 求误差更详细的推到过程：
+- 求误差更详细的推导过程：
 ![enter description here][18]
 
 ### 6、梯度检查
@@ -661,7 +661,14 @@ def predict(Theta1,Theta2,X):
 - 先说一下向量内积
  - ![u = \left[ {\begin{array}{c}    {{u_1}} \\    {{u_2}}  \end{array} } \right]](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=u%20%3D%20%5Cleft%5B%20%7B%5Cbegin%7Barray%7D%7Bc%7D%20%20%20%20%7B%7Bu_1%7D%7D%20%5C%5C%20%20%20%20%7B%7Bu_2%7D%7D%20%20%5Cend%7Barray%7D%20%7D%20%5Cright%5D)，![v = \left[ {\begin{array}{c}    {{v_1}} \\    {{v_2}}  \end{array} } \right]](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=v%20%3D%20%5Cleft%5B%20%7B%5Cbegin%7Barray%7D%7Bc%7D%20%20%20%20%7B%7Bv_1%7D%7D%20%5C%5C%20%20%20%20%7B%7Bv_2%7D%7D%20%20%5Cend%7Barray%7D%20%7D%20%5Cright%5D)    
  - ![||u||](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7C%7Cu%7C%7C)表示`u`的**欧几里得范数**（欧式范数），![||u||{\text{ = }}\sqrt {{\text{u}}_1^2 + u_2^2} ](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7C%7Cu%7C%7C%7B%5Ctext%7B%20%3D%20%7D%7D%5Csqrt%20%7B%7B%5Ctext%7Bu%7D%7D_1%5E2%20%2B%20u_2%5E2%7D%20)
- - 
+ - `向量V`在`向量u`上的投影的长度记为`p`，则：向量内积：    
+ ![{{\text{u}}^T}v = p||u|| = {u_1}{v_1} + {u_2}{v_2}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7B%7B%5Ctext%7Bu%7D%7D%5ET%7Dv%20%3D%20p%7C%7Cu%7C%7C%20%3D%20%7Bu_1%7D%7Bv_1%7D%20%2B%20%7Bu_2%7D%7Bv_2%7D)
+ ![enter description here][27]  
+根据向量夹角公式推导一下即可。![\cos \theta  = \frac{{\overrightarrow {\text{u}} \overrightarrow v }}{{|\overrightarrow {\text{u}} ||\overrightarrow v |}}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%5Ccos%20%5Ctheta%20%20%3D%20%5Cfrac%7B%7B%5Coverrightarrow%20%7B%5Ctext%7Bu%7D%7D%20%5Coverrightarrow%20v%20%7D%7D%7B%7B%7C%5Coverrightarrow%20%7B%5Ctext%7Bu%7D%7D%20%7C%7C%5Coverrightarrow%20v%20%7C%7D%7D)
+
+- 前面说过，当`C`越大时，`margin`也就越大，我们的目的是最小化代价函数`J(θ)`,当`margin`最大时，`C`的乘积项![\sum\limits_{i = 1}^m {[{y^{(i)}}\cos {t_1}({\theta ^T}{x^{(i)}}) + (1 - {y^{(i)}})\cos {t_0}({\theta ^T}{x^{(i)}})} ]](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%5Csum%5Climits_%7Bi%20%3D%201%7D%5Em%20%7B%5B%7By%5E%7B%28i%29%7D%7D%5Ccos%20%7Bt_1%7D%28%7B%5Ctheta%20%5ET%7D%7Bx%5E%7B%28i%29%7D%7D%29%20%2B%20%281%20-%20%7By%5E%7B%28i%29%7D%7D%29%5Ccos%20%7Bt_0%7D%28%7B%5Ctheta%20%5ET%7D%7Bx%5E%7B%28i%29%7D%7D%29%7D%20%5D)要很小，所以近似为：   
+![J(\theta ) = C0 + \frac{1}{2}\sum\limits_{j = 1}^{\text{n}} {\theta _j^2}  = \frac{1}{2}\sum\limits_{j = 1}^{\text{n}} {\theta _j^2}  = \frac{1}{2}(\theta _1^2 + \theta _2^2) = \frac{1}{2}{\sqrt {\theta _1^2 + \theta _2^2} ^2}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=J%28%5Ctheta%20%29%20%3D%20C0%20%2B%20%5Cfrac%7B1%7D%7B2%7D%5Csum%5Climits_%7Bj%20%3D%201%7D%5E%7B%5Ctext%7Bn%7D%7D%20%7B%5Ctheta%20_j%5E2%7D%20%20%3D%20%5Cfrac%7B1%7D%7B2%7D%5Csum%5Climits_%7Bj%20%3D%201%7D%5E%7B%5Ctext%7Bn%7D%7D%20%7B%5Ctheta%20_j%5E2%7D%20%20%3D%20%5Cfrac%7B1%7D%7B2%7D%28%5Ctheta%20_1%5E2%20%2B%20%5Ctheta%20_2%5E2%29%20%3D%20%5Cfrac%7B1%7D%7B2%7D%7B%5Csqrt%20%7B%5Ctheta%20_1%5E2%20%2B%20%5Ctheta%20_2%5E2%7D%20%5E2%7D)
+
 
 
 
@@ -692,3 +699,4 @@ def predict(Theta1,Theta2,X):
   [24]: ./images/SVM_01.png "SVM_01.png"
   [25]: ./images/SVM_02.png "SVM_02.png"
   [26]: ./images/SVM_03.png "SVM_03.png"
+  [27]: ./images/SVM_04.png "SVM_04.png"
