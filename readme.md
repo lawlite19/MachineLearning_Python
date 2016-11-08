@@ -672,9 +672,8 @@ def predict(Theta1,Theta2,X):
 - 由   
 ![\left\{ {\begin{array}{c}    {{\theta ^T}{x^{(i)}} \geqslant 1} \\    {{\theta ^T}{x^{(i)}} \leqslant  - 1}  \end{array} } \right.\begin{array}{c}    {({y^{(i)}} = 1)} \\    {({y^{(i)}} = 0)}  \end{array} ](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%5Cleft%5C%7B%20%7B%5Cbegin%7Barray%7D%7Bc%7D%20%20%20%20%7B%7B%5Ctheta%20%5ET%7D%7Bx%5E%7B%28i%29%7D%7D%20%5Cgeqslant%201%7D%20%5C%5C%20%20%20%20%7B%7B%5Ctheta%20%5ET%7D%7Bx%5E%7B%28i%29%7D%7D%20%5Cleqslant%20%20-%201%7D%20%20%5Cend%7Barray%7D%20%7D%20%5Cright.%5Cbegin%7Barray%7D%7Bc%7D%20%20%20%20%7B%28%7By%5E%7B%28i%29%7D%7D%20%3D%201%29%7D%20%5C%5C%20%20%20%20%7B%28%7By%5E%7B%28i%29%7D%7D%20%3D%200%29%7D%20%20%5Cend%7Barray%7D%20)可以得到：    
 ![\left\{ {\begin{array}{c}    {{p^{(i)}}||\theta || \geqslant 1} \\    {{p^{(i)}}||\theta || \leqslant  - 1}  \end{array} } \right.\begin{array}{c}    {({y^{(i)}} = 1)} \\    {({y^{(i)}} = 0)}  \end{array} ](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%5Cleft%5C%7B%20%7B%5Cbegin%7Barray%7D%7Bc%7D%20%20%20%20%7B%7Bp%5E%7B%28i%29%7D%7D%7C%7C%5Ctheta%20%7C%7C%20%5Cgeqslant%201%7D%20%5C%5C%20%20%20%20%7B%7Bp%5E%7B%28i%29%7D%7D%7C%7C%5Ctheta%20%7C%7C%20%5Cleqslant%20%20-%201%7D%20%20%5Cend%7Barray%7D%20%7D%20%5Cright.%5Cbegin%7Barray%7D%7Bc%7D%20%20%20%20%7B%28%7By%5E%7B%28i%29%7D%7D%20%3D%201%29%7D%20%5C%5C%20%20%20%20%7B%28%7By%5E%7B%28i%29%7D%7D%20%3D%200%29%7D%20%20%5Cend%7Barray%7D%20)，`p`即为`x`在`θ`上的投影
-
-
-
+- 如下图所示，假设决策边界如图，找其中的一个点，到`θ`上的投影为`p`,则![p||\theta || \geqslant 1](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=p%7C%7C%5Ctheta%20%7C%7C%20%5Cgeqslant%201)或者![p||\theta || \leqslant  - 1](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=p%7C%7C%5Ctheta%20%7C%7C%20%5Cleqslant%20%20-%201)，若是`p`很小，则需要![||\theta ||](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7C%7C%5Ctheta%20%7C%7C)很大，这与我们要求的`θ`使![||\theta || = \frac{1}{2}\sqrt {\theta _1^2 + \theta _2^2} ](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7C%7C%5Ctheta%20%7C%7C%20%3D%20%5Cfrac%7B1%7D%7B2%7D%5Csqrt%20%7B%5Ctheta%20_1%5E2%20%2B%20%5Ctheta%20_2%5E2%7D%20)最小相违背，**所以**最后求的是`large margin`
+![enter description here][28]
 
 
   [1]: ./images/LinearRegression_01.png "LinearRegression_01.png"
@@ -704,3 +703,4 @@ def predict(Theta1,Theta2,X):
   [25]: ./images/SVM_02.png "SVM_02.png"
   [26]: ./images/SVM_03.png "SVM_03.png"
   [27]: ./images/SVM_04.png "SVM_04.png"
+  [28]: ./images/SVM_05.png "SVM_05.png"
