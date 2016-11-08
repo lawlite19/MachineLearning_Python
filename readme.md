@@ -675,6 +675,24 @@ def predict(Theta1,Theta2,X):
 - 如下图所示，假设决策边界如图，找其中的一个点，到`θ`上的投影为`p`,则![p||\theta || \geqslant 1](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=p%7C%7C%5Ctheta%20%7C%7C%20%5Cgeqslant%201)或者![p||\theta || \leqslant  - 1](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=p%7C%7C%5Ctheta%20%7C%7C%20%5Cleqslant%20%20-%201)，若是`p`很小，则需要![||\theta ||](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7C%7C%5Ctheta%20%7C%7C)很大，这与我们要求的`θ`使![||\theta || = \frac{1}{2}\sqrt {\theta _1^2 + \theta _2^2} ](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7C%7C%5Ctheta%20%7C%7C%20%3D%20%5Cfrac%7B1%7D%7B2%7D%5Csqrt%20%7B%5Ctheta%20_1%5E2%20%2B%20%5Ctheta%20_2%5E2%7D%20)最小相违背，**所以**最后求的是`large margin`
 ![enter description here][28]
 
+### 3、SVM Kernel（核函数）
+- 对于线性可分的问题，使用**线性核函数**即可
+- 对于线性不可分的问题，在逻辑回归中，我们是将`feature`映射为使用多项式的形式![1 + {x_1} + {x_2} + x_1^2 + {x_1}{x_2} + x_2^2](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=1%20%2B%20%7Bx_1%7D%20%2B%20%7Bx_2%7D%20%2B%20x_1%5E2%20%2B%20%7Bx_1%7D%7Bx_2%7D%20%2B%20x_2%5E2)，`SVM`中也有**多项式核函数**，但是更常用的是**高斯核函数**，也称为**RBF核**
+- 高斯核函数为：![f(x) = {e^{ - \frac{{||x - u|{|^2}}}{{2{\sigma ^2}}}}}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=f%28x%29%20%3D%20%7Be%5E%7B%20-%20%5Cfrac%7B%7B%7C%7Cx%20-%20u%7C%7B%7C%5E2%7D%7D%7D%7B%7B2%7B%5Csigma%20%5E2%7D%7D%7D%7D%7D)     
+假设如图几个点，
+![enter description here][29]
+令：   
+![{f_1} = similarity(x,{l^{(1)}}) = {e^{ - \frac{{||x - {l^{(1)}}|{|^2}}}{{2{\sigma ^2}}}}}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7Bf_1%7D%20%3D%20similarity%28x%2C%7Bl%5E%7B%281%29%7D%7D%29%20%3D%20%7Be%5E%7B%20-%20%5Cfrac%7B%7B%7C%7Cx%20-%20%7Bl%5E%7B%281%29%7D%7D%7C%7B%7C%5E2%7D%7D%7D%7B%7B2%7B%5Csigma%20%5E2%7D%7D%7D%7D%7D)   
+![{f_2} = similarity(x,{l^{(2)}}) = {e^{ - \frac{{||x - {l^{(2)}}|{|^2}}}{{2{\sigma ^2}}}}}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7Bf_2%7D%20%3D%20similarity%28x%2C%7Bl%5E%7B%282%29%7D%7D%29%20%3D%20%7Be%5E%7B%20-%20%5Cfrac%7B%7B%7C%7Cx%20-%20%7Bl%5E%7B%282%29%7D%7D%7C%7B%7C%5E2%7D%7D%7D%7B%7B2%7B%5Csigma%20%5E2%7D%7D%7D%7D%7D)
+.
+.
+.
+- 可以看出，若是`x`与![{l^{(1)}}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7Bl%5E%7B%281%29%7D%7D)距离较近，==》![{f_1} \approx {e^0} = 1](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7Bf_1%7D%20%5Capprox%20%7Be%5E0%7D%20%3D%201)，（即相似度较大）   
+若是`x`与![{l^{(1)}}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7Bl%5E%7B%281%29%7D%7D)距离较远，==》![{f_2} \approx {e^{ - \infty }} = 0](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7Bf_2%7D%20%5Capprox%20%7Be%5E%7B%20-%20%5Cinfty%20%7D%7D%20%3D%200)，（即相似度较低）
+- 高斯核函数的`σ`越小，`f`下降的越快
+![enter description here][30]
+![enter description here][31]
+
 
   [1]: ./images/LinearRegression_01.png "LinearRegression_01.png"
   [2]: ./images/LogisticRegression_01.png "LogisticRegression_01.png"
@@ -704,3 +722,6 @@ def predict(Theta1,Theta2,X):
   [26]: ./images/SVM_03.png "SVM_03.png"
   [27]: ./images/SVM_04.png "SVM_04.png"
   [28]: ./images/SVM_05.png "SVM_05.png"
+  [29]: ./images/SVM_06.png "SVM_06.png"
+  [30]: ./images/SVM_07.png "SVM_07.png"
+  [31]: ./images/SVM_08.png "SVM_08.png"
