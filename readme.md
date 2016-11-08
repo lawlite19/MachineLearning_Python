@@ -693,6 +693,44 @@ def predict(Theta1,Theta2,X):
 ![enter description here][30]
 ![enter description here][31]
 
+- 如何选择初始的![{l^{(1)}}{l^{(2)}}{l^{(3)}}...](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7Bl%5E%7B%281%29%7D%7D%7Bl%5E%7B%282%29%7D%7D%7Bl%5E%7B%283%29%7D%7D...)
+ - 训练集：![(({x^{(1)}},{y^{(1)}}),({x^{(2)}},{y^{(2)}}),...({x^{(m)}},{y^{(m)}}))](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%28%28%7Bx%5E%7B%281%29%7D%7D%2C%7By%5E%7B%281%29%7D%7D%29%2C%28%7Bx%5E%7B%282%29%7D%7D%2C%7By%5E%7B%282%29%7D%7D%29%2C...%28%7Bx%5E%7B%28m%29%7D%7D%2C%7By%5E%7B%28m%29%7D%7D%29%29)
+ - 选择：![{l^{(1)}} = {x^{(1)}},{l^{(2)}} = {x^{(2)}}...{l^{(m)}} = {x^{(m)}}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7Bl%5E%7B%281%29%7D%7D%20%3D%20%7Bx%5E%7B%281%29%7D%7D%2C%7Bl%5E%7B%282%29%7D%7D%20%3D%20%7Bx%5E%7B%282%29%7D%7D...%7Bl%5E%7B%28m%29%7D%7D%20%3D%20%7Bx%5E%7B%28m%29%7D%7D)
+ - 对于给出的`x`，计算`f`,令：![f_0^{(i)} = 1](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=f_0%5E%7B%28i%29%7D%20%3D%201)所以：![{f^{(i)}} \in {R^{m + 1}}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7Bf%5E%7B%28i%29%7D%7D%20%5Cin%20%7BR%5E%7Bm%20%2B%201%7D%7D)
+ - 最小化`J`求出`θ`，          
+ ![J(\theta ) = C\sum\limits_{i = 1}^m {[{y^{(i)}}\cos {t_1}({\theta ^T}{f^{(i)}}) + (1 - {y^{(i)}})\cos {t_0}({\theta ^T}{f^{(i)}})} ] + \frac{1}{2}\sum\limits_{j = 1}^{\text{n}} {\theta _j^2} ](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=J%28%5Ctheta%20%29%20%3D%20C%5Csum%5Climits_%7Bi%20%3D%201%7D%5Em%20%7B%5B%7By%5E%7B%28i%29%7D%7D%5Ccos%20%7Bt_1%7D%28%7B%5Ctheta%20%5ET%7D%7Bf%5E%7B%28i%29%7D%7D%29%20%2B%20%281%20-%20%7By%5E%7B%28i%29%7D%7D%29%5Ccos%20%7Bt_0%7D%28%7B%5Ctheta%20%5ET%7D%7Bf%5E%7B%28i%29%7D%7D%29%7D%20%5D%20%2B%20%5Cfrac%7B1%7D%7B2%7D%5Csum%5Climits_%7Bj%20%3D%201%7D%5E%7B%5Ctext%7Bn%7D%7D%20%7B%5Ctheta%20_j%5E2%7D%20)
+ - 如果![{\theta ^T}f \geqslant 0](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7B%5Ctheta%20%5ET%7Df%20%5Cgeqslant%200)，==》预测`y=1`
+
+### 4、使用`scikit-learn`中的`SVM`模型代码
+- 线性可分的,指定核函数为`linear`：
+```
+    '''data1——线性分类'''
+    data1 = spio.loadmat('data1.mat')
+    X = data1['X']
+    y = data1['y']
+    y = np.ravel(y)
+    plot_data(X,y)
+    
+    model = svm.SVC(C=1.0,kernel='linear').fit(X,y) # 指定核函数为线性核函数
+```
+- 非线性可分的，默认核函数为`rbf`
+```
+    '''data2——非线性分类'''
+    data2 = spio.loadmat('data2.mat')
+    X = data2['X']
+    y = data2['y']
+    y = np.ravel(y)
+    plt = plot_data(X,y)
+    plt.show()
+    
+    model = svm.SVC(gamma=100).fit(X,y)     # gamma为核函数的系数，值越大拟合的越好
+```
+### 5、运行结果
+- 线性可分的决策边界：    
+![enter description here][32]
+- 线性不可分的决策边界：   
+![enter description here][33]
+
 
   [1]: ./images/LinearRegression_01.png "LinearRegression_01.png"
   [2]: ./images/LogisticRegression_01.png "LogisticRegression_01.png"
@@ -725,3 +763,5 @@ def predict(Theta1,Theta2,X):
   [29]: ./images/SVM_06.png "SVM_06.png"
   [30]: ./images/SVM_07.png "SVM_07.png"
   [31]: ./images/SVM_08.png "SVM_08.png"
+  [32]: ./images/SVM_09.png "SVM_09.png"
+  [33]: ./images/SVM_10.png "SVM_10.png"
