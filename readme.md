@@ -689,7 +689,7 @@ def predict(Theta1,Theta2,X):
 .
 - 可以看出，若是`x`与![{l^{(1)}}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7Bl%5E%7B%281%29%7D%7D)距离较近，==》![{f_1} \approx {e^0} = 1](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7Bf_1%7D%20%5Capprox%20%7Be%5E0%7D%20%3D%201)，（即相似度较大）   
 若是`x`与![{l^{(1)}}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7Bl%5E%7B%281%29%7D%7D)距离较远，==》![{f_2} \approx {e^{ - \infty }} = 0](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7Bf_2%7D%20%5Capprox%20%7Be%5E%7B%20-%20%5Cinfty%20%7D%7D%20%3D%200)，（即相似度较低）
-- 高斯核函数的`σ`越小，`f`下降的越快
+- 高斯核函数的`σ`越小，`f`下降的越快      
 ![enter description here][30]
 ![enter description here][31]
 
