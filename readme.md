@@ -636,6 +636,18 @@ def predict(Theta1,Theta2,X):
 - 归一化后训练集预测准确度     
 ![enter description here][23]
 
+--------------------
+
+## 四、SVM支持向量机
+
+### 1、代价函数
+- 在逻辑回归中，我们的代价为：![\cos t({h_\theta }(x),y) = \left\{ {\begin{array}{c}    { - \log ({h_\theta }(x))} \\    { - \log (1 - {h_\theta }(x))}  \end{array} \begin{array}{c}    {y = 1} \\    {y = 0}  \end{array} } \right.](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%5Ccos%20t%28%7Bh_%5Ctheta%20%7D%28x%29%2Cy%29%20%3D%20%5Cleft%5C%7B%20%7B%5Cbegin%7Barray%7D%7Bc%7D%20%20%20%20%7B%20-%20%5Clog%20%28%7Bh_%5Ctheta%20%7D%28x%29%29%7D%20%5C%5C%20%20%20%20%7B%20-%20%5Clog%20%281%20-%20%7Bh_%5Ctheta%20%7D%28x%29%29%7D%20%20%5Cend%7Barray%7D%20%5Cbegin%7Barray%7D%7Bc%7D%20%20%20%20%7By%20%3D%201%7D%20%5C%5C%20%20%20%20%7By%20%3D%200%7D%20%20%5Cend%7Barray%7D%20%7D%20%5Cright.)，其中：![{h_\theta }({\text{z}}) = \frac{1}{{1 + {e^{ - z}}}}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7Bh_%5Ctheta%20%7D%28%7B%5Ctext%7Bz%7D%7D%29%20%3D%20%5Cfrac%7B1%7D%7B%7B1%20%2B%20%7Be%5E%7B%20-%20z%7D%7D%7D%7D)，![{h_\theta }({\text{z}}) = \frac{1}{{1 + {e^{ - z}}}}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7Bh_%5Ctheta%20%7D%28%7B%5Ctext%7Bz%7D%7D%29%20%3D%20%5Cfrac%7B1%7D%7B%7B1%20%2B%20%7Be%5E%7B%20-%20z%7D%7D%7D%7D)
+- 如图所示，如果`y=1`，`cost`代价函数如图所示    
+![enter description here][24]
+我们想让![{\theta ^T}x &gt;  &gt; 0](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7B%5Ctheta%20%5ET%7Dx%20%3E%20%20%3E%200)，即`z>>0`，这样的话`cost`代价函数才会趋于最小（这是我们想要的），所以用途中**红色**的函数![\cos {t_1}(z)](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%5Ccos%20%7Bt_1%7D%28z%29)代替逻辑回归中的cost
+- 当`y=0`时同样，用![\cos {t_0}(z)](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%5Ccos%20%7Bt_0%7D%28z%29)代替
+![enter description here][25]
+
 
   [1]: ./images/LinearRegression_01.png "LinearRegression_01.png"
   [2]: ./images/LogisticRegression_01.png "LogisticRegression_01.png"
@@ -660,3 +672,5 @@ def predict(Theta1,Theta2,X):
   [21]: ./images/NeuralNetwork_07.png "NeuralNetwork_07.png"
   [22]: ./images/NeuralNetwork_08.png "NeuralNetwork_08.png"
   [23]: ./images/NeuralNetwork_09.png "NeuralNetwork_09.png"
+  [24]: ./images/SVM_01.png "SVM_01.png"
+  [25]: ./images/SVM_02.png "SVM_02.png"
