@@ -732,6 +732,17 @@ def predict(Theta1,Theta2,X):
 - 线性不可分的决策边界：   
 ![enter description here][33]
 
+--------------------------
+
+## 五、K-Means聚类算法
+- [全部代码](/K-Means/K-Menas.py)
+### 1、
+
+
+
+
+
+
 
   [1]: ./images/LinearRegression_01.png "LinearRegression_01.png"
   [2]: ./images/LogisticRegression_01.png "LogisticRegression_01.png"
