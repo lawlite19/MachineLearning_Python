@@ -743,11 +743,11 @@ def predict(Theta1,Theta2,X):
  - 第一步：簇分配，随机选`K`个点作为中心，计算到这`K`个点的距离，分为`K`个簇
  - 第二步：移动聚类中心：重新计算每个**簇**的中心，移动中心，重复以上步骤。
 - 如下图所示：
- - 随机分配的聚类中心
+ - 随机分配的聚类中心  
  ![enter description here][34]
- - 重新计算聚类中心，移动一次
+ - 重新计算聚类中心，移动一次  
  ![enter description here][35]
- - 最后`10`步之后的聚类中心
+ - 最后`10`步之后的聚类中心  
  ![enter description here][36]
 - 计算每条数据到哪个中心最近实现代码：
 ```
@@ -857,9 +857,9 @@ def runKMeans(X,initial_centroids,max_iters,plot_process):
 ```
 
 ### 7、运行结果
-- 二维数据类中心的移动
+- 二维数据类中心的移动  
 ![enter description here][38]
-- 图片压缩
+- 图片压缩  
 ![enter description here][39]
 
 
