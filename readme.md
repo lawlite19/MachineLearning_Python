@@ -841,7 +841,7 @@ def runKMeans(X,initial_centroids,max_iters,plot_process):
     return centroids,idx    # 返回聚类中心和数据属于哪个类
 ```
 
-### 6、[使用scikit-learn库中的线性模型实现聚类](/K-Means/K-Means_scikit-learn.py.py)
+### 6、[使用scikit-learn库中的线性模型实现聚类](/K-Means/K-Means_scikit-learn.py)
 
 - 导入包
 ```
