@@ -749,6 +749,9 @@ def predict(Theta1,Theta2,X):
  ![enter description here][35]
  - 最后`10`步之后的聚类中心  
  ![enter description here][36]
+
+- 
+
 - 计算每条数据到哪个中心最近实现代码：
 ```
 # 找到每条数据距离哪个类中心最近    
@@ -785,11 +788,8 @@ def computerCentroids(X,idx,K):
 ### 2、目标函数
 - 也叫做**失真代价函数**
 - ![J({c^{(1)}}, \cdots ,{c^{(m)}},{u_1}, \cdots ,{u_k}) = \frac{1}{m}\sum\limits_{i = 1}^m {||{x^{(i)}} - {u_{{c^{(i)}}}}|{|^2}} ](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=J%28%7Bc%5E%7B%281%29%7D%7D%2C%20%5Ccdots%20%2C%7Bc%5E%7B%28m%29%7D%7D%2C%7Bu_1%7D%2C%20%5Ccdots%20%2C%7Bu_k%7D%29%20%3D%20%5Cfrac%7B1%7D%7Bm%7D%5Csum%5Climits_%7Bi%20%3D%201%7D%5Em%20%7B%7C%7C%7Bx%5E%7B%28i%29%7D%7D%20-%20%7Bu_%7B%7Bc%5E%7B%28i%29%7D%7D%7D%7D%7C%7B%7C%5E2%7D%7D%20)
-- 最后我们想得到：
-![\mathop {\min }\limits_\begin{subarray}{l} 
-  {c^{(1)}}, \cdots ,{c^{(m)}} \\ 
-  {u_1}, \cdots ,{u_k} 
-\end{subarray}  J({c^{(1)}}, \cdots ,{c^{(m)}},{u_1}, \cdots ,{u_k})](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%5Cmathop%20%7B%5Cmin%20%7D%5Climits_%5Cbegin%7Bsubarray%7D%7Bl%7D%20%0A%20%20%7Bc%5E%7B%281%29%7D%7D%2C%20%5Ccdots%20%2C%7Bc%5E%7B%28m%29%7D%7D%20%5C%5C%20%0A%20%20%7Bu_1%7D%2C%20%5Ccdots%20%2C%7Bu_k%7D%20%0A%5Cend%7Bsubarray%7D%20%20J%28%7Bc%5E%7B%281%29%7D%7D%2C%20%5Ccdots%20%2C%7Bc%5E%7B%28m%29%7D%7D%2C%7Bu_1%7D%2C%20%5Ccdots%20%2C%7Bu_k%7D%29)
+- 最后我们想得到：  
+![enter description here][37]
 - 其中![{c^{(i)}}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7Bc%5E%7B%28i%29%7D%7D)表示第`i`条数据距离哪个类中心最近，
 - 其中![{u_i}](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7Bu_i%7D)即为聚类的中心
 
@@ -813,7 +813,7 @@ def kMeansInitCentroids(X,K):
 - 聚类是不知道y的label的，所以不知道真正的聚类个数
 - 肘部法则（Elbow method）
  - 作代价函数`J`和`K`的图，若是出现一个拐点，如下图所示，`K`就取拐点处的值，下图此时`K=3`
- ![enter description here][37]
+ ![enter description here][38]
  - 若是很平滑就不明确，人为选择。
 - 第二种就是人为观察选择
 
@@ -858,17 +858,14 @@ def runKMeans(X,initial_centroids,max_iters,plot_process):
 
 ### 7、运行结果
 - 二维数据类中心的移动  
-![enter description here][38]
-- 图片压缩  
 ![enter description here][39]
+- 图片压缩  
+![enter description here][40]
 
 
 ----------------------
 
 六、主成分分析（降维）
-
-
-
 
 
   [1]: ./images/LinearRegression_01.png "LinearRegression_01.png"
@@ -907,6 +904,7 @@ def runKMeans(X,initial_centroids,max_iters,plot_process):
   [34]: ./images/K-Means_01.png "K-Means_01.png"
   [35]: ./images/K-Means_02.png "K-Means_02.png"
   [36]: ./images/K-Means_03.png "K-Means_03.png"
-  [37]: ./images/K-Means_04.png "K-Means_04.png"
-  [38]: ./images/K-Means_05.png "K-Means_05.png"
-  [39]: ./images/K-Means_06.png "K-Means_06.png"
+  [37]: ./images/K-Means_07.png "K-Means_07.png"
+  [38]: ./images/K-Means_04.png "K-Means_04.png"
+  [39]: ./images/K-Means_05.png "K-Means_05.png"
+  [40]: ./images/K-Means_06.png "K-Means_06.png"
