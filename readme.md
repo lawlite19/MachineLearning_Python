@@ -750,8 +750,6 @@ def predict(Theta1,Theta2,X):
  - 最后`10`步之后的聚类中心  
  ![enter description here][36]
 
-- 
-
 - 计算每条数据到哪个中心最近实现代码：
 ```
 # 找到每条数据距离哪个类中心最近    
