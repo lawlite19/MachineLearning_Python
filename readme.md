@@ -31,6 +31,12 @@ def computerCost(X,y,theta):
 - 所以对theta的更新可以写为：   
 ![{\theta _j} = {\theta _j} - \alpha \frac{1}{m}\sum\limits_{i = 1}^m {[({h_\theta }({x^{(i)}}) - {y^{(i)}})x_j^{(i)}]} ](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%7B%5Ctheta%20_j%7D%20%3D%20%7B%5Ctheta%20_j%7D%20-%20%5Calpha%20%5Cfrac%7B1%7D%7Bm%7D%5Csum%5Climits_%7Bi%20%3D%201%7D%5Em%20%7B%5B%28%7Bh_%5Ctheta%20%7D%28%7Bx%5E%7B%28i%29%7D%7D%29%20-%20%7By%5E%7B%28i%29%7D%7D%29x_j%5E%7B%28i%29%7D%5D%7D%20)
 - 其中![\alpha ](http://chart.apis.google.com/chart?cht=tx&chs=1x0&chf=bg,s,FFFFFF00&chco=000000&chl=%5Calpha%20)为学习速率，控制梯度下降的速度，一般取**0.01,0.03,0.1,0.3.....**
+- 为什么梯度下降可以逐步减小代价函数
+ - 假设函数`f(x)`
+ - 泰勒展开：`f(x+△x)=f(x)+f'(x)*△x+o(△x)`
+ - 另：`△x=-α*f'(x)`   ,即负梯度方向乘以一个很小的步长`α`
+ - 将`△x`代入泰勒展开式中：`f(x+x)=f(x)-α*[f'(x)]²+o(△x)`
+ - 可以看出，`α`是取得很小的正数，`[f'(x)]²`也是整数，所以可以得出：`f(x+△x)<=f(x)`
 - 实现代码
 ```
 # 梯度下降算法
