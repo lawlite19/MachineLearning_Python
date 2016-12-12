@@ -870,7 +870,7 @@ def runKMeans(X,initial_centroids,max_iters,plot_process):
 
 ----------------------
 
-六、主成分分析（降维）
+六、PCA主成分分析（降维）
 
 
   [1]: ./images/LinearRegression_01.png "LinearRegression_01.png"
