@@ -872,6 +872,7 @@ def runKMeans(X,initial_centroids,max_iters,plot_process):
 
 ## 六、PCA主成分分析（降维）
 - [全部代码](/PCA/PCA.py)
+
 ### 1、用处
 - 数据压缩（Data Compression）,使程序运行更快
 - 可视化数据，例如`3D-->2D`等
