@@ -969,7 +969,11 @@ def runKMeans(X,initial_centroids,max_iters,plot_process):
  ![$$error{\kern 1pt} \;ratio = 1 - {{\sum\limits_{i = 1}^k {{S_{ii}}} } \over {\sum\limits_{i = 1}^n {{S_{ii}}} }} \le threshold$$](http://latex.codecogs.com/gif.latex?%5Cfn_cm%20%24%24error%7B%5Ckern%201pt%7D%20%5C%3Bratio%20%3D%201%20-%20%7B%7B%5Csum%5Climits_%7Bi%20%3D%201%7D%5Ek%20%7B%7BS_%7Bii%7D%7D%7D%20%7D%20%5Cover%20%7B%5Csum%5Climits_%7Bi%20%3D%201%7D%5En%20%7B%7BS_%7Bii%7D%7D%7D%20%7D%7D%20%5Cle%20threshold%24%24)
  - 可以一点点增加`K`尝试。
 
-### 7、运行结果
+### 7、使用建议
+- 不要使用PCA去解决过拟合问题`Overfitting`，还是使用正则化的方法（如果保留了很高的差异性还是可以的）
+- 只有在原数据上有好的结果，但是运行很慢，才考虑使用PCA
+
+### 8、运行结果
 - 2维数据降为1维
  - 要投影的方向     
 ![enter description here][44]
