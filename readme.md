@@ -950,13 +950,12 @@ def runKMeans(X,initial_centroids,max_iters,plot_process):
  - ![$${X_{approx}} = {(U_{reduce}^{ - 1})^{ - 1}}Z = {U_{reduce}}Z$$](http://latex.codecogs.com/gif.latex?%5Cfn_cm%20%24%24%7BX_%7Bapprox%7D%7D%20%3D%20%7B%28U_%7Breduce%7D%5E%7B%20-%201%7D%29%5E%7B%20-%201%7D%7DZ%20%3D%20%7BU_%7Breduce%7D%7DZ%24%24)
  - 实现代码：
  ```
-     # 映射数据
-    def projectData(X_norm,U,K):
-        Z = np.zeros((X_norm.shape[0],K))
-        
-        U_reduce = U[:,0:K]          # 取前K个
-        Z = np.dot(X_norm,U_reduce) 
-        return Z
+    # 恢复数据
+    def recoverData(Z,U,K):
+        X_rec = np.zeros((Z.shape[0],U.shape[0]))
+        U_recude = U[:,0:K]
+        X_rec = np.dot(Z,np.transpose(U_recude))  # 还原数据（近似）
+        return X_rec
  ```
 
 ### 6、主成分个数的选择（即要降的维度）
