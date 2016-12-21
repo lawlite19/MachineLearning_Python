@@ -948,9 +948,9 @@ def runKMeans(X,initial_centroids,max_iters,plot_process):
  - 所以：![$${X_{approx}} = {(U_{reduce}^T)^{ - 1}}Z$$](http://latex.codecogs.com/gif.latex?%5Cfn_cm%20%24%24%7BX_%7Bapprox%7D%7D%20%3D%20%7B%28U_%7Breduce%7D%5ET%29%5E%7B%20-%201%7D%7DZ%24%24)     （注意这里是X的近似值）
  - 又因为`Ureduce`为正定矩阵，【正定矩阵满足：![$$A{A^T} = {A^T}A = E$$](http://latex.codecogs.com/gif.latex?%5Cfn_cm%20%24%24A%7BA%5ET%7D%20%3D%20%7BA%5ET%7DA%20%3D%20E%24%24)，所以：![$${A^{ - 1}} = {A^T}$$](http://latex.codecogs.com/gif.latex?%5Cfn_cm%20%24%24%7BA%5E%7B%20-%201%7D%7D%20%3D%20%7BA%5ET%7D%24%24)】，所以这里：
  - ![$${X_{approx}} = {(U_{reduce}^{ - 1})^{ - 1}}Z = {U_{reduce}}Z$$](http://latex.codecogs.com/gif.latex?%5Cfn_cm%20%24%24%7BX_%7Bapprox%7D%7D%20%3D%20%7B%28U_%7Breduce%7D%5E%7B%20-%201%7D%29%5E%7B%20-%201%7D%7DZ%20%3D%20%7BU_%7Breduce%7D%7DZ%24%24)
- - 实现代码：    
+ - 实现代码：
  ```
-    # 恢复数据
+     # 恢复数据
     def recoverData(Z,U,K):
         X_rec = np.zeros((Z.shape[0],U.shape[0]))
         U_recude = U[:,0:K]
