@@ -102,6 +102,7 @@ def projectData(X_norm,U,K):
 def drawline(plt,p1,p2,line_type):
     plt.plot(np.array([p1[0],p2[0]]),np.array([p1[1],p2[1]]),line_type)  
 
+  
 
 # 恢复数据
 def recoverData(Z,U,K):
