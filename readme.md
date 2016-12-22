@@ -988,6 +988,49 @@ def runKMeans(X,initial_centroids,max_iters,plot_process):
  - 恢复数据    
  ![enter description here][48]
 
+### 9、[使用scikit-learn库中的PCA实现降维](/PCA/PCA.py_scikit-learn.py)
+- 导入需要的包：
+```
+#-*- coding: utf-8 -*-
+# Author:bob
+# Date:2016.12.22
+import numpy as np
+from matplotlib import pyplot as plt
+from scipy import io as spio
+from sklearn.decomposition import pca
+from sklearn.preprocessing import StandardScaler
+```
+- 归一化数据
+```
+    '''归一化数据并作图'''
+    scaler = StandardScaler()
+    scaler.fit(X)
+    x_train = scaler.transform(X)
+```
+- 使用PCA模型拟合数据，并降维
+```
+    '''拟合数据'''
+    K=1 # 要降的维度
+    model = pca.PCA(n_components=K).fit(x_train)   # 拟合数据，n_components定义要降的维度
+    Z = model.transform(x_train)    # transform就会执行降维操作
+```
+ - `n_components`对应要将的维度
+
+- 数据恢复
+```
+    '''数据恢复并作图'''
+    Ureduce = model.components_     # 得到降维用的Ureduce
+    x_rec = np.dot(Z,Ureduce)       # 数据恢复
+```
+ - `model.components_`会得到降维使用的`U`矩阵
+
+
+---------------------------------------------------------------
+
+
+### 七、异常检测 Anomaly Detection
+
+
 
   [1]: ./images/LinearRegression_01.png "LinearRegression_01.png"
   [2]: ./images/LogisticRegression_01.png "LogisticRegression_01.png"
