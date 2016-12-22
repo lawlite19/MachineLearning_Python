@@ -1008,21 +1008,22 @@ from sklearn.preprocessing import StandardScaler
     x_train = scaler.transform(X)
 ```
 - 使用PCA模型拟合数据，并降维
+ - `n_components`对应要将的维度
 ```
     '''拟合数据'''
     K=1 # 要降的维度
     model = pca.PCA(n_components=K).fit(x_train)   # 拟合数据，n_components定义要降的维度
     Z = model.transform(x_train)    # transform就会执行降维操作
 ```
- - `n_components`对应要将的维度
 
 - 数据恢复
+ - `model.components_`会得到降维使用的`U`矩阵 
 ```
     '''数据恢复并作图'''
     Ureduce = model.components_     # 得到降维用的Ureduce
     x_rec = np.dot(Z,Ureduce)       # 数据恢复
 ```
- - `model.components_`会得到降维使用的`U`矩阵
+
 
 
 ---------------------------------------------------------------
