@@ -83,7 +83,7 @@ def featureNormalize(X):
     mu = np.zeros((1,n));
     sigma = np.zeros((1,n))
     
-    mu = np.mean(X,axis=0)
+    mu = np.mean(X,axis=0)   # axis=0表示列
     sigma = np.std(X,axis=0)
     for i in range(n):
         X[:,i] = (X[:,i]-mu[i])/sigma[i]
