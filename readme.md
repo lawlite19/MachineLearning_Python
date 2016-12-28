@@ -1153,7 +1153,7 @@ def multivariateGaussian(X,mu,Sigma2):
 ![enter description here][56]
 - 等高线      
 ![enter description here][57]
-- 异常点   
+- 异常点标注   
 ![enter description here][58]
 
 
