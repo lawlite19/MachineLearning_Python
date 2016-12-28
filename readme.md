@@ -1126,6 +1126,39 @@ def selectThreshold(yval,pval):
  若：   
   ![enter description here][55]，   
  表示x1,x2**负相关**
+- 实现代码：
+```
+# 多元高斯分布函数    
+def multivariateGaussian(X,mu,Sigma2):
+    k = len(mu)
+    if (Sigma2.shape[0]>1):
+        Sigma2 = np.diag(Sigma2)
+    '''多元高斯分布函数'''    
+    X = X-mu
+    argu = (2*np.pi)**(-k/2)*np.linalg.det(Sigma2)**(-0.5)
+    p = argu*np.exp(-0.5*np.sum(np.dot(X,np.linalg.inv(Sigma2))*X,axis=1))  # axis表示每行
+    return p
+```
+### 6、单元和多元高斯分布特点
+- 单元高斯分布
+ - 人为可以捕捉到`feature`之间的关系时可以使用
+ - 计算量小
+- 多元高斯分布
+ - 自动捕捉到相关的feature
+ - 计算量大，因为：![$$\Sigma  \in {R^{n \times {\rm{n}}}}$$](http://latex.codecogs.com/png.latex?%5Cfn_cm%20%24%24%5CSigma%20%5Cin%20%7BR%5E%7Bn%20%5Ctimes%20%7B%5Crm%7Bn%7D%7D%7D%7D%24%24)
+ - `m>n`或`Σ`可逆时可以使用。（若不可逆，可能有冗余的x，因为线性相关，不可逆，或者就是m<n）
+
+### 7、程序运行结果
+- 显示数据     
+![enter description here][56]
+- 等高线      
+![enter description here][57]
+- 异常点   
+![enter description here][58]
+
+
+
+----------------------------------
 
 
   [1]: ./images/LinearRegression_01.png "LinearRegression_01.png"
@@ -1183,3 +1216,6 @@ def selectThreshold(yval,pval):
   [53]: ./images/AnomalyDetection_05.png "AnomalyDetection_05.png"
   [54]: ./images/AnomalyDetection_07.png "AnomalyDetection_07.png"
   [55]: ./images/AnomalyDetection_06.png "AnomalyDetection_06.png"
+  [56]: ./images/AnomalyDetection_08.png "AnomalyDetection_08.png"
+  [57]: ./images/AnomalyDetection_09.png "AnomalyDetection_09.png"
+  [58]: ./images/AnomalyDetection_10.png "AnomalyDetection_10.png"
