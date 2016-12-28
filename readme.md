@@ -1048,6 +1048,14 @@ from sklearn.preprocessing import StandardScaler
  - 选择具有代表异常的`feature`:xi
  - 参数估计：![$${u_1},{u_2}, \cdots ,{u_n};\sigma _1^2,\sigma _2^2 \cdots ,\sigma _n^2$$](http://latex.codecogs.com/png.latex?%5Cfn_cm%20%24%24%7Bu_1%7D%2C%7Bu_2%7D%2C%20%5Ccdots%20%2C%7Bu_n%7D%3B%5Csigma%20_1%5E2%2C%5Csigma%20_2%5E2%20%5Ccdots%20%2C%5Csigma%20_n%5E2%24%24)
  - 计算`p(x)`,若是`P(x)<ε`则认为异常，其中`ε`为我们要求的概率的临界值`threshold`
+- 这里只是**单元高斯分布**，假设了`feature`之间是独立的，下面会讲到**多元高斯分布**，会自动捕捉到`feature`之间的关系
+
+### 3、评价`p(x)`的好坏，以及`ε`的选取
+- 因为数据可能是非常**偏斜**的（就是`y=1`的个数非常少，(`y=1`表示异常)），所以可以使用`Precision/Recall`，计算`F1Score`(在**CV交叉验证集**上)，公式：   
+![$${F_1}Score = 2{{PR} \over {P + R}}$$](http://latex.codecogs.com/png.latex?%5Cfn_cm%20%24%24%7BF_1%7DScore%20%3D%202%7B%7BPR%7D%20%5Cover%20%7BP%20&plus;%20R%7D%7D%24%24)
+- `ε`的选取
+ - 尝试多个`ε`值，使`F1Score`的值高
+
 
 
 
