@@ -1051,12 +1051,19 @@ from sklearn.preprocessing import StandardScaler
 - 这里只是**单元高斯分布**，假设了`feature`之间是独立的，下面会讲到**多元高斯分布**，会自动捕捉到`feature`之间的关系
 
 ### 3、评价`p(x)`的好坏，以及`ε`的选取
-- 因为数据可能是非常**偏斜**的（就是`y=1`的个数非常少，(`y=1`表示异常)），所以可以使用`Precision/Recall`，计算`F1Score`(在**CV交叉验证集**上)，公式：   
-![$${F_1}Score = 2{{PR} \over {P + R}}$$](http://latex.codecogs.com/png.latex?%5Cfn_cm%20%24%24%7BF_1%7DScore%20%3D%202%7B%7BPR%7D%20%5Cover%20%7BP%20&plus;%20R%7D%7D%24%24)
+- 对**偏斜数据**的错误度量
+ - 因为数据可能是非常**偏斜**的（就是`y=1`的个数非常少，(`y=1`表示异常)），所以可以使用`Precision/Recall`，计算`F1Score`(在**CV交叉验证集**上)
+ - 例如：预测癌症，假设模型可以得到`99%`能够预测正确，`1%`的错误率，但是实际癌症的概率很小，只有`0.5%`，那么我们始终预测没有癌症y=0反而可以得到更小的错误率。使用`error rate`来评估就不科学了。
+ - 如下图记录：    
+ ![enter description here][49]
+ - ![$$\Pr ecision = {{TP} \over {TP + FP}}$$](http://latex.codecogs.com/png.latex?%5Cfn_cm%20%24%24%5CPr%20ecision%20%3D%20%7B%7BTP%7D%20%5Cover%20%7BTP%20&plus;%20FP%7D%7D%24%24) ，即：**正确预测正样本/所有预测正样本**
+ - ![$${\mathop{\rm Re}\nolimits} {\rm{call}} = {{TP} \over {TP + FN}}$$](http://latex.codecogs.com/png.latex?%5Cfn_cm%20%24%24%7B%5Cmathop%7B%5Crm%20Re%7D%5Cnolimits%7D%20%7B%5Crm%7Bcall%7D%7D%20%3D%20%7B%7BTP%7D%20%5Cover%20%7BTP%20&plus;%20FN%7D%7D%24%24) ，即：**正确预测正样本/真实值为正样本**
+ - 总是让`y=1`(较少的类)，计算`Precision`和`Recall`
+ - ![$${F_1}Score = 2{{PR} \over {P + R}}$$](http://latex.codecogs.com/png.latex?%5Cfn_cm%20%24%24%7BF_1%7DScore%20%3D%202%7B%7BPR%7D%20%5Cover%20%7BP%20&plus;%20R%7D%7D%24%24)
+ - 还是以癌症预测为例，假设预测都是no-cancer，TN=199，FN=1，TP=0，FP=0，所以：Precision=0/0，Recall=0/1=0，尽管accuracy=199/200=99.5%，但是不可信。
+
 - `ε`的选取
  - 尝试多个`ε`值，使`F1Score`的值高
-
-
 
 
   [1]: ./images/LinearRegression_01.png "LinearRegression_01.png"
@@ -1107,3 +1114,4 @@ from sklearn.preprocessing import StandardScaler
   [46]: ./images/PCA_06.png "PCA_06.png"
   [47]: ./images/PCA_07.png "PCA_07.png"
   [48]: ./images/PCA_08.png "PCA_08.png"
+  [49]: ./images/AnomalyDetection.png "AnomalyDetection.png"
