@@ -1121,10 +1121,10 @@ def selectThreshold(yval,pval):
  - 同样，`|Σ|`越小，`p(x)`越尖
  - 例如：    
  ![enter description here][53]，  
- 表示x1,x2**正相关**，即x1越大，x2也就越大
- ![enter description here][54]
+ 表示x1,x2**正相关**，即x1越大，x2也就越大，如下图，也就可以将红色的异常点检查出了
+ ![enter description here][54]      
  若：   
-  ![enter description here][55]，
+  ![enter description here][55]，   
  表示x1,x2**负相关**
 
 
