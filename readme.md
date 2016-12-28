@@ -1029,8 +1029,21 @@ from sklearn.preprocessing import StandardScaler
 ---------------------------------------------------------------
 
 
-### 七、异常检测 Anomaly Detection
+## 七、异常检测 Anomaly Detection
+- [全部代码](/AnomalyDetection/AnomalyDetection.py)
 
+### 1、异常检测流程
+- ![$${x^{(i)}}$$](http://latex.codecogs.com/png.latex?%5Cfn_cm%20%24%24%7Bx%5E%7B%28i%29%7D%7D%24%24)对应feature
+- 建立模型model：`P(x)`
+- 检查若是：`P(x)<ε`，则认为是异常,其中`ε`为我们要求的概率的临界值`threshold`
+
+### 2、高斯分布（正态分布）`Gaussian distribution` 
+- 分布函数：![$$p(x) = {1 \over {\sqrt {2\pi } \sigma }}{e^{ - {{{{(x - u)}^2}} \over {2{\sigma ^2}}}}}$$](http://latex.codecogs.com/png.latex?%5Cfn_cm%20%24%24p%28x%29%20%3D%20%7B1%20%5Cover%20%7B%5Csqrt%20%7B2%5Cpi%20%7D%20%5Csigma%20%7D%7D%7Be%5E%7B%20-%20%7B%7B%7B%7B%28x%20-%20u%29%7D%5E2%7D%7D%20%5Cover%20%7B2%7B%5Csigma%20%5E2%7D%7D%7D%7D%7D%24%24)
+ - 其中，`u`为数据的**均值**，`σ`为数据的**标准差**
+ - `σ`越**小**，对应的图像越**尖**
+- 参数估计（`parameter estimation`）
+ - ![$$u = {1 \over m}\sum\limits_{i = 1}^m {{x^{(i)}}} $$](http://latex.codecogs.com/png.latex?%5Cfn_cm%20%24%24u%20%3D%20%7B1%20%5Cover%20m%7D%5Csum%5Climits_%7Bi%20%3D%201%7D%5Em%20%7B%7Bx%5E%7B%28i%29%7D%7D%7D%20%24%24)
+ - ![$${\sigma ^2} = {1 \over m}\sum\limits_{i = 1}^m {{{({x^{(i)}} - u)}^2}} $$](http://latex.codecogs.com/png.latex?%5Cfn_cm%20%24%24%7B%5Csigma%20%5E2%7D%20%3D%20%7B1%20%5Cover%20m%7D%5Csum%5Climits_%7Bi%20%3D%201%7D%5Em%20%7B%7B%7B%28%7Bx%5E%7B%28i%29%7D%7D%20-%20u%29%7D%5E2%7D%7D%20%24%24)
 
 
   [1]: ./images/LinearRegression_01.png "LinearRegression_01.png"
