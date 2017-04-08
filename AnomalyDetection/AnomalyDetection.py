@@ -22,7 +22,7 @@ def anomalyDetection_example():
     
     '''选择异常点（在交叉验证CV上训练得到最好的epsilon）'''
     Xval = data['Xval']
-    yval = data['yval']
+    yval = data['yval']   # y=1代表异常
     pval = multivariateGaussian(Xval, mu, sigma2) # 计算CV上的概率密度值
     epsilon,F1 = selectThreshold(yval,pval)       # 选择最优的epsilon临界值
     print u'在CV上得到的最好的epsilon是：%e'%epsilon
