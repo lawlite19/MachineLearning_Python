@@ -44,8 +44,8 @@ def neuralNetwork(input_layer_size,hidden_layer_size,out_put_layer):
     #np.savetxt("testTheta.csv",initial_nn_params,delimiter=",")
     start = time.time()
     result = optimize.fmin_cg(nnCostFunction, initial_nn_params, fprime=nnGradient, args=(input_layer_size,hidden_layer_size,out_put_layer,X,y,Lambda))
-    print u'执行时间：',time.time()-start
-    print result
+    print (u'执行时间：',time.time()-start)
+    print (result)
     '''可视化 Theta1'''
     length = result.shape[0]
     Theta1 = result[0:hidden_layer_size*(input_layer_size+1)].reshape(hidden_layer_size,input_layer_size+1)
@@ -54,7 +54,7 @@ def neuralNetwork(input_layer_size,hidden_layer_size,out_put_layer):
     display_data(Theta2[:,1:length])
     '''预测'''
     p = predict(Theta1,Theta2,X)
-    print u"预测准确度为：%f%%"%np.mean(np.float64(p == y.reshape(-1,1))*100)    
+    print (u"预测准确度为：%f%%"%np.mean(np.float64(p == y.reshape(-1,1))*100))    
     res = np.hstack((p,y.reshape(-1,1)))
     np.savetxt("predict.csv", res, delimiter=',')
     
@@ -81,8 +81,12 @@ def display_data(imgData):
     display_array = -np.ones((pad+rows_count*(height+pad),pad+cols_count*(width+pad)))
     for i in range(rows_count):
         for j in range(cols_count):
+            if sum >= m: #超过了行数，退出当前循环
+                break;
             display_array[pad+i*(height+pad):pad+i*(height+pad)+height,pad+j*(width+pad):pad+j*(width+pad)+width] = imgData[sum,:].reshape(height,width,order="F")    # order=F指定以列优先，在matlab中是这样的，python中需要指定，默认以行
             sum += 1
+        if sum >= m:  #超过了行数，退出当前循环
+            break;
             
     plt.imshow(display_array,cmap='gray')   #显示灰度图像
     plt.axis('off')
@@ -219,7 +223,7 @@ def checkGradient(Lambda = 0):
         step[i]=0
     # 显示两列比较
     res = np.hstack((num_grad.reshape(-1,1),grad.reshape(-1,1)))
-    print res
+    print (res)
 
 # 初始化调试的theta权重
 def debugInitializeWeights(fan_in,fan_out):
