@@ -96,8 +96,8 @@ def plotJ(J_history,num_iters):
 # 测试linearRegression函数
 def testLinearRegression():
     mu,sigma,theta = linearRegression(0.01,400)
-    print u"\n计算的theta值为：\n",theta
-    print u"\n预测结果为：%f"%predict(mu, sigma, theta)
+    #print u"\n计算的theta值为：\n",theta
+    #print u"\n预测结果为：%f"%predict(mu, sigma, theta)
     
 # 测试学习效果（预测）
 def predict(mu,sigma,theta):

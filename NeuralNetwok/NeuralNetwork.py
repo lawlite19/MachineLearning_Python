@@ -43,7 +43,7 @@ def neuralNetwork(input_layer_size,hidden_layer_size,out_put_layer):
     initial_nn_params = np.vstack((initial_Theta1.reshape(-1,1),initial_Theta2.reshape(-1,1)))  #展开theta    
     #np.savetxt("testTheta.csv",initial_nn_params,delimiter=",")
     start = time.time()
-    result = optimize.fmin_cg(nnCostFunction, initial_nn_params, fprime=nnGradient, args=(input_layer_size,hidden_layer_size,out_put_layer,X,y,Lambda))
+    result = optimize.fmin_cg(nnCostFunction, initial_nn_params, fprime=nnGradient, args=(input_layer_size,hidden_layer_size,out_put_layer,X,y,Lambda), maxiter=100)
     print (u'执行时间：',time.time()-start)
     print (result)
     '''可视化 Theta1'''
@@ -124,14 +124,16 @@ def nnCostFunction(nn_params,input_layer_size,hidden_layer_size,num_labels,X,y,L
     h  = sigmoid(z3)    
     '''代价'''    
     J = -(np.dot(np.transpose(class_y.reshape(-1,1)),np.log(h.reshape(-1,1)))+np.dot(np.transpose(1-class_y.reshape(-1,1)),np.log(1-h.reshape(-1,1)))-Lambda*term/2)/m   
-    
+    #temp1 = (h.reshape(-1,1)-class_y.reshape(-1,1))
+    #temp2 = (temp1**2).sum()
+    #J = 1/(2*m)*temp2
     return np.ravel(J)
 
 # 梯度
 def nnGradient(nn_params,input_layer_size,hidden_layer_size,num_labels,X,y,Lambda):
     length = nn_params.shape[0]
-    Theta1 = nn_params[0:hidden_layer_size*(input_layer_size+1)].reshape(hidden_layer_size,input_layer_size+1)
-    Theta2 = nn_params[hidden_layer_size*(input_layer_size+1):length].reshape(num_labels,hidden_layer_size+1)
+    Theta1 = nn_params[0:hidden_layer_size*(input_layer_size+1)].reshape(hidden_layer_size,input_layer_size+1).copy()   # 这里使用copy函数，否则下面修改Theta的值，nn_params也会一起修改
+    Theta2 = nn_params[hidden_layer_size*(input_layer_size+1):length].reshape(num_labels,hidden_layer_size+1).copy()
     m = X.shape[0]
     class_y = np.zeros((m,num_labels))      # 数据的y对应0-9，需要映射为0/1的关系    
     # 映射y
@@ -146,9 +148,8 @@ def nnGradient(nn_params,input_layer_size,hidden_layer_size,num_labels,X,y,Lambd
     
     Theta1_grad = np.zeros((Theta1.shape))  #第一层到第二层的权重
     Theta2_grad = np.zeros((Theta2.shape))  #第二层到第三层的权重
-    
-    Theta1[:,0] = 0;
-    Theta2[:,0] = 0;
+      
+   
     '''正向传播，每次需要补上一列1的偏置bias'''
     a1 = np.hstack((np.ones((m,1)),X))
     z2 = np.dot(a1,np.transpose(Theta1))
@@ -157,15 +158,19 @@ def nnGradient(nn_params,input_layer_size,hidden_layer_size,num_labels,X,y,Lambd
     z3 = np.dot(a2,np.transpose(Theta2))
     h  = sigmoid(z3)
     
+    
     '''反向传播，delta为误差，'''
     delta3 = np.zeros((m,num_labels))
     delta2 = np.zeros((m,hidden_layer_size))
     for i in range(m):
-        delta3[i,:] = h[i,:]-class_y[i,:]
+        #delta3[i,:] = (h[i,:]-class_y[i,:])*sigmoidGradient(z3[i,:])  # 均方误差的误差率
+        delta3[i,:] = h[i,:]-class_y[i,:]                              # 交叉熵误差率
         Theta2_grad = Theta2_grad+np.dot(np.transpose(delta3[i,:].reshape(1,-1)),a2[i,:].reshape(1,-1))
         delta2[i,:] = np.dot(delta3[i,:].reshape(1,-1),Theta2_x)*sigmoidGradient(z2[i,:])
         Theta1_grad = Theta1_grad+np.dot(np.transpose(delta2[i,:].reshape(1,-1)),a1[i,:].reshape(1,-1))
     
+    Theta1[:,0] = 0
+    Theta2[:,0] = 0          
     '''梯度'''
     grad = (np.vstack((Theta1_grad.reshape(-1,1),Theta2_grad.reshape(-1,1)))+Lambda*np.vstack((Theta1.reshape(-1,1),Theta2.reshape(-1,1))))/m
     return np.ravel(grad)
@@ -223,6 +228,7 @@ def checkGradient(Lambda = 0):
         step[i]=0
     # 显示两列比较
     res = np.hstack((num_grad.reshape(-1,1),grad.reshape(-1,1)))
+    print("检查梯度的结果，第一列为数值法计算得到的，第二列为BP得到的:")
     print (res)
 
 # 初始化调试的theta权重
@@ -256,5 +262,5 @@ def predict(Theta1,Theta2,X):
     return p    
 
 if __name__ == "__main__":
-    #checkGradient()
+    checkGradient()
     neuralNetwork(400, 25, 10)
