@@ -46,7 +46,7 @@ def plot_decisionBoundary(X,y,model,class_='linear'):
     if class_=='linear':
         w = model.coef_
         b = model.intercept_
-        xp = np.linspace(np.min(X[:,0]),np.max(X[:,1]),100)
+        xp = np.linspace(np.min(X[:,0]),np.max(X[:,0]),100)
         yp = -(w[0,0]*xp+b)/w[0,1]
         plt.plot(xp,yp,'b-',linewidth=2.0)
         plt.show()
