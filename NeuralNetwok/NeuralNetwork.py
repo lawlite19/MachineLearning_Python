@@ -205,7 +205,7 @@ def checkGradient(Lambda = 0):
     initial_Theta1 = debugInitializeWeights(input_layer_size,hidden_layer_size); 
     initial_Theta2 = debugInitializeWeights(hidden_layer_size,num_labels)
     X = debugInitializeWeights(input_layer_size-1,m)
-    y = 1+np.transpose(np.mod(np.arange(1,m+1), num_labels))# 初始化y
+    y = np.transpose(np.mod(np.arange(1,m+1), num_labels))# 初始化y
     
     y = y.reshape(-1,1)
     nn_params = np.vstack((initial_Theta1.reshape(-1,1),initial_Theta2.reshape(-1,1)))  #展开theta 
