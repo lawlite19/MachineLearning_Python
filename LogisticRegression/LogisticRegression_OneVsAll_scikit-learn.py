@@ -1,4 +1,5 @@
 #-*- coding: utf-8 -*-
+from __future__ import print_function
 from scipy import io as spio
 import numpy as np
 from sklearn import svm
@@ -17,7 +18,7 @@ def logisticRegression_oneVsAll():
     
     predict = model.predict(X) #预测
     
-    print u"预测准确度为：%f%%"%np.mean(np.float64(predict == y)*100)
+    print(u"预测准确度为：%f%%"%np.mean(np.float64(predict == y)*100))
 
 # 加载mat文件
 def loadmat_data(fileName):

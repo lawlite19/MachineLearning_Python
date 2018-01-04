@@ -1,4 +1,5 @@
 #-*- coding: utf-8 -*-
+from __future__ import print_function
 import numpy as np
 from matplotlib import pyplot as plt
 from matplotlib import colors
@@ -11,7 +12,7 @@ font = FontProperties(fname=r"c:\windows\fonts\simsun.ttc", size=14)    # 解决
 
 def KMeans():
     '''二维数据聚类过程演示'''
-    print u'聚类过程展示...\n'
+    print(u'聚类过程展示...\n')
     data = spio.loadmat("data.mat")
     X = data['X']
     K = 3   # 总类数
@@ -21,7 +22,7 @@ def KMeans():
     '''
     图片压缩
     '''
-    print u'K-Means压缩图片\n'
+    print(u'K-Means压缩图片\n')
     img_data = misc.imread("bird.png")  # 读取图片像素数据
     img_data = img_data/255.0             # 像素值映射到0-1
     img_size = img_data.shape
@@ -31,13 +32,13 @@ def KMeans():
     max_iters = 5
     initial_centroids = kMeansInitCentroids(X,K)
     centroids,idx = runKMeans(X, initial_centroids, max_iters, False)
-    print u'\nK-Means运行结束\n'
-    print u'\n压缩图片...\n'
+    print(u'\nK-Means运行结束\n')
+    print(u'\n压缩图片...\n')
     idx = findClosestCentroids(X, centroids)
     X_recovered = centroids[idx,:]
     X_recovered = X_recovered.reshape(img_size[0],img_size[1],3)
     
-    print u'绘制图片...\n'
+    print(u'绘制图片...\n')
     plt.subplot(1,2,1)
     plt.imshow(img_data)
     plt.title(u"原先图片",fontproperties=font)
@@ -45,7 +46,7 @@ def KMeans():
     plt.imshow(X_recovered)
     plt.title(u"压缩图像",fontproperties=font)
     plt.show()
-    print u'运行结束！'
+    print(u'运行结束！')
     
     
 # 找到每条数据距离哪个类中心最近    
@@ -86,7 +87,7 @@ def runKMeans(X,initial_centroids,max_iters,plot_process):
     idx = np.zeros((m,1))           # 每条数据属于哪个类
     
     for i in range(max_iters):      # 迭代次数
-        print u'迭代计算次数：%d'%(i+1)
+        print(u'迭代计算次数：%d'%(i+1))
         idx = findClosestCentroids(X, centroids)
         if plot_process:    # 如果绘制图像
             plt = plotProcessKMeans(X,centroids,previous_centroids) # 画聚类中心的移动过程

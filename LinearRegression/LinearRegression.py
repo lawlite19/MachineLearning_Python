@@ -1,4 +1,5 @@
 #-*- coding: utf-8 -*-
+from __future__ import print_function
 import numpy as np
 from matplotlib import pyplot as plt
 from matplotlib.font_manager import FontProperties
@@ -6,7 +7,7 @@ font = FontProperties(fname=r"c:\windows\fonts\simsun.ttc", size=14)    # 解决
 
 
 def linearRegression(alpha=0.01,num_iters=400):
-    print u"加载数据...\n"
+    print(u"加载数据...\n")
     
     data = loadtxtAndcsv_data("data.txt",",",np.float64)  #读取数据
     X = data[:,0:-1]      # X对应0到倒数第2列                  
@@ -19,7 +20,7 @@ def linearRegression(alpha=0.01,num_iters=400):
     
     X = np.hstack((np.ones((m,1)),X))    # 在X前加一列1
     
-    print u"\n执行梯度下降算法....\n"
+    print(u"\n执行梯度下降算法....\n")
     
     theta = np.zeros((col,1))
     y = y.reshape(-1,1)   #将行向量转化为列
@@ -73,7 +74,7 @@ def gradientDescent(X,y,theta,alpha,num_iters):
         temp[:,i] = theta - ((alpha/m)*(np.dot(np.transpose(X),h-y)))   #梯度的计算
         theta = temp[:,i]
         J_history[i] = computerCost(X,y,theta)      #调用计算代价函数
-        print '.',      
+        print('.', end=' ')      
     return theta,J_history  
 
 # 计算代价函数

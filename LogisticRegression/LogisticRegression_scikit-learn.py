@@ -4,39 +4,38 @@ from sklearn.cross_validation import train_test_split
 import numpy as np
 
 def logisticRegression():
-    data = loadtxtAndcsv_data("data1.txt", ",", np.float64) 
+    data = loadtxtAndcsv_data("data1.txt", ",", np.float64)
     X = data[:,0:-1]
     y = data[:,-1]
-    
-    # »®·ÖÎªÑµÁ·¼¯ºÍ²âÊÔ¼¯
+
+    # ï¿½ï¿½ï¿½ï¿½ÎªÑµï¿½ï¿½ï¿½ï¿½ï¿½Í²ï¿½ï¿½Ô¼ï¿½
     x_train,x_test,y_train,y_test = train_test_split(X,y,test_size=0.2)
-    
-    # ¹éÒ»»¯
+
+    # ï¿½ï¿½Ò»ï¿½ï¿½
     scaler = StandardScaler()
     scaler.fit(x_train)
     x_train = scaler.fit_transform(x_train)
     x_test = scaler.fit_transform(x_test)
-    
-    #Âß¼­»Ø¹é
+
+    #ï¿½ß¼ï¿½ï¿½Ø¹ï¿½
     model = LogisticRegression()
     model.fit(x_train,y_train)
-    
-    # Ô¤²â
+
+    # Ô¤ï¿½ï¿½
     predict = model.predict(x_test)
     right = sum(predict == y_test)
-    
-    predict = np.hstack((predict.reshape(-1,1),y_test.reshape(-1,1)))   # ½«Ô¤²âÖµºÍÕæÊµÖµ·ÅÔÚÒ»¿é£¬ºÃ¹Û²ì
-    print predict
-    print ('²âÊÔ¼¯×¼È·ÂÊ£º%f%%'%(right*100.0/predict.shape[0]))          #¼ÆËãÔÚ²âÊÔ¼¯ÉÏµÄ×¼È·¶È
 
-# ¼ÓÔØtxtºÍcsvÎÄ¼þ
+    predict = np.hstack((predict.reshape(-1,1),y_test.reshape(-1,1)))   # ï¿½ï¿½Ô¤ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ÊµÖµï¿½ï¿½ï¿½ï¿½Ò»ï¿½é£¬ï¿½Ã¹Û²ï¿½
+    print(predict)
+    print('ï¿½ï¿½ï¿½Ô¼ï¿½×¼È·ï¿½Ê£ï¿½%f%%'%(right*100.0/predict.shape[0]))          #ï¿½ï¿½ï¿½ï¿½ï¿½Ú²ï¿½ï¿½Ô¼ï¿½ï¿½Ïµï¿½×¼È·ï¿½ï¿½
+
+# ï¿½ï¿½ï¿½ï¿½txtï¿½ï¿½csvï¿½Ä¼ï¿½
 def loadtxtAndcsv_data(fileName,split,dataType):
     return np.loadtxt(fileName,delimiter=split,dtype=dataType)
 
-# ¼ÓÔØnpyÎÄ¼þ
+# ï¿½ï¿½ï¿½ï¿½npyï¿½Ä¼ï¿½
 def loadnpy_data(fileName):
     return np.load(fileName)
-
 
 
 if __name__ == "__main__":
