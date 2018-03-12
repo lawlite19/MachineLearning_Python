@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
 from sklearn.cross_validation import train_test_split
@@ -8,32 +10,32 @@ def logisticRegression():
     X = data[:,0:-1]
     y = data[:,-1]
     
-    # »®·ÖÎªÑµÁ·¼¯ºÍ²âÊÔ¼¯
+    # åˆ’åˆ†ä¸ºè®­ç»ƒé›†å’Œæµ‹è¯•é›†
     x_train,x_test,y_train,y_test = train_test_split(X,y,test_size=0.2)
     
-    # ¹éÒ»»¯
+    # å½’ä¸€åŒ–
     scaler = StandardScaler()
     scaler.fit(x_train)
     x_train = scaler.fit_transform(x_train)
     x_test = scaler.fit_transform(x_test)
     
-    #Âß¼­»Ø¹é
+    #é€»è¾‘å›å½’
     model = LogisticRegression()
     model.fit(x_train,y_train)
     
-    # Ô¤²â
+    # é¢„æµ‹
     predict = model.predict(x_test)
     right = sum(predict == y_test)
     
-    predict = np.hstack((predict.reshape(-1,1),y_test.reshape(-1,1)))   # ½«Ô¤²âÖµºÍÕæÊµÖµ·ÅÔÚÒ»¿é£¬ºÃ¹Û²ì
+    predict = np.hstack((predict.reshape(-1,1),y_test.reshape(-1,1)))   # å°†é¢„æµ‹å€¼å’ŒçœŸå®å€¼æ”¾åœ¨ä¸€å—ï¼Œå¥½è§‚å¯Ÿ
     print predict
-    print ('²âÊÔ¼¯×¼È·ÂÊ£º%f%%'%(right*100.0/predict.shape[0]))          #¼ÆËãÔÚ²âÊÔ¼¯ÉÏµÄ×¼È·¶È
+    print ('æµ‹è¯•é›†å‡†ç¡®ç‡ï¼š%f%%'%(right*100.0/predict.shape[0]))          #è®¡ç®—åœ¨æµ‹è¯•é›†ä¸Šçš„å‡†ç¡®åº¦
 
-# ¼ÓÔØtxtºÍcsvÎÄ¼ş
+# åŠ è½½txtå’Œcsvæ–‡ä»¶
 def loadtxtAndcsv_data(fileName,split,dataType):
     return np.loadtxt(fileName,delimiter=split,dtype=dataType)
 
-# ¼ÓÔØnpyÎÄ¼ş
+# åŠ è½½npyæ–‡ä»¶
 def loadnpy_data(fileName):
     return np.load(fileName)
 
