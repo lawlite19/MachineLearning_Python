@@ -1,4 +1,5 @@
 #-*- coding: utf-8 -*-
+from __future__ import print_function
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy.io as spio
@@ -27,7 +28,7 @@ def logisticRegression_OneVsAll():
     #res = np.hstack((p,y.reshape(-1,1)))
     #np.savetxt("predict.csv", res, delimiter=',')
     
-    print u"预测准确度为：%f%%"%np.mean(np.float64(p == y.reshape(-1,1))*100)
+    print(u"预测准确度为：%f%%"%np.mean(np.float64(p == y.reshape(-1,1))*100))
      
 # 加载mat文件
 def loadmat_data(fileName):

@@ -1,4 +1,5 @@
 #-*- coding: utf-8 -*-
+from __future__ import print_function
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import optimize
@@ -19,7 +20,7 @@ def LogisticRegression():
     
     J = costFunction(initial_theta,X,y,initial_lambda)  #计算一下给定初始化的theta和lambda求出的代价J
     
-    print J  #输出一下计算的值，应该为0.693147
+    print(J)  #输出一下计算的值，应该为0.693147
     #result = optimize.fmin(costFunction, initial_theta, args=(X,y,initial_lambda))    #直接使用最小化的方法，效果不好
     '''调用scipy中的优化算法fmin_bfgs（拟牛顿法Broyden-Fletcher-Goldfarb-Shanno）
     - costFunction是自己实现的一个求代价的函数，
@@ -29,7 +30,7 @@ def LogisticRegression():
     '''
     result = optimize.fmin_bfgs(costFunction, initial_theta, fprime=gradient, args=(X,y,initial_lambda))    
     p = predict(X, result)   #预测
-    print u'在训练集上的准确度为%f%%'%np.mean(np.float64(p==y)*100)   # 与真实值比较，p==y返回True，转化为float   
+    print(u'在训练集上的准确度为%f%%'%np.mean(np.float64(p==y)*100))   # 与真实值比较，p==y返回True，转化为float   
     
     X = data[:,0:-1]
     y = data[:,-1]    

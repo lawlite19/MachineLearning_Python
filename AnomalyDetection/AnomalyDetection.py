@@ -1,6 +1,7 @@
 #-*- coding: utf-8 -*-
 # Author: Bob
 # Date:   2016.12.22
+from __future__ import print_function
 import numpy as np
 from matplotlib import pyplot as plt
 from scipy import io as spio
@@ -25,8 +26,8 @@ def anomalyDetection_example():
     yval = data['yval']   # y=1代表异常
     pval = multivariateGaussian(Xval, mu, sigma2) # 计算CV上的概率密度值
     epsilon,F1 = selectThreshold(yval,pval)       # 选择最优的epsilon临界值
-    print (u'在CV上得到的最好的epsilon是：%e'%epsilon)
-    print (u'对应的F1Score值为：%f'%F1)
+    print(u'在CV上得到的最好的epsilon是：%e'%epsilon)
+    print(u'对应的F1Score值为：%f'%F1)
     outliers = np.where(p<epsilon)  # 找到小于临界值的异常点，并作图
     plt.plot(X[outliers,0],X[outliers,1],'o',markeredgecolor='r',markerfacecolor='w',markersize=10.)
     plt = display_2d_data(X, 'bx')
