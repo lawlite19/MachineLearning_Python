@@ -2,7 +2,8 @@
 
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
-from sklearn.cross_validation import train_test_split
+# from sklearn.cross_validation import train_test_split  # 0.18版本之后废弃
+from sklearn.model_selection import train_test_split
 import numpy as np
 
 def logisticRegression():
