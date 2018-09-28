@@ -1161,9 +1161,9 @@ def selectThreshold(yval,pval):
     '''计算'''
     for epsilon in np.arange(np.min(pval),np.max(pval),step):
         cvPrecision = pval<epsilon
-        tp = np.sum((cvPrecision == 1) & (yval == 1)).astype(float)  # sum求和是int型的，需要转为float
-        fp = np.sum((cvPrecision == 1) & (yval == 0)).astype(float)
-        fn = np.sum((cvPrecision == 1) & (yval == 0)).astype(float)
+        tp = np.sum((cvPrecision == 1) & (yval == 1).ravel()).astype(float)  # sum求和是int型的，需要转为float
+        fp = np.sum((cvPrecision == 1) & (yval == 0).ravel()).astype(float)
+        fn = np.sum((cvPrecision == 0) & (yval == 1).ravel()).astype(float)
         precision = tp/(tp+fp)  # 精准度
         recision = tp/(tp+fn)   # 召回率
         F1 = (2*precision*recision)/(precision+recision)  # F1Score计算公式

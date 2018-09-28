@@ -16,9 +16,9 @@ def anomalyDetection_example():
     plt.show()
     '''多元高斯分布函数，并可视化拟合的边界'''
     mu,sigma2 = estimateGaussian(X)         # 参数估计（求均值和方差）
-    #print mu,sigma2
+    #print (mu,sigma2)
     p = multivariateGaussian(X,mu,sigma2)   # 多元高斯分布函数
-    #print p
+    #print (p)
     visualizeFit(X,mu,sigma2)  # 显示图像
     
     '''选择异常点（在交叉验证CV上训练得到最好的epsilon）'''
@@ -73,7 +73,7 @@ def visualizeFit(X,mu,sigma2):
     plt.plot(X[:,0],X[:,1],'bx')
     
     if np.sum(np.isinf(Z).astype(float)) == 0:   # 如果计算的为无穷，就不用画了
-        # plt.contourf(X1,X2,Z,10.**np.arange(-20, 0, 3),linewidth=.5)
+        #plt.contourf(X1,X2,Z,10.**np.arange(-20, 0, 3),linewidth=.5)
         CS = plt.contour(X1,X2,Z,10.**np.arange(-20, 0, 3),color='black',linewidth=.5)   # 画等高线，Z的值在10.**np.arange(-20, 0, 3)
         #plt.clabel(CS)
             
@@ -89,9 +89,9 @@ def selectThreshold(yval,pval):
     '''计算'''
     for epsilon in np.arange(np.min(pval),np.max(pval),step):
         cvPrecision = pval<epsilon
-        tp = np.sum((cvPrecision == 1) & (yval == 1)).astype(float)  # sum求和是int型的，需要转为float
-        fp = np.sum((cvPrecision == 1) & (yval == 0)).astype(float)
-        fn = np.sum((cvPrecision == 1) & (yval == 0)).astype(float)
+        tp = np.sum((cvPrecision == 1) & (yval == 1).ravel()).astype(float)  # sum求和是int型的，需要转为float
+        fp = np.sum((cvPrecision == 1) & (yval == 0).ravel()).astype(float)
+        fn = np.sum((cvPrecision == 0) & (yval == 1).ravel()).astype(float)
         precision = tp/(tp+fp)  # 精准度
         recision = tp/(tp+fn)   # 召回率
         F1 = (2*precision*recision)/(precision+recision)  # F1Score计算公式
