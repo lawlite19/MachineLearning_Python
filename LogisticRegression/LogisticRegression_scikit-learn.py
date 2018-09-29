@@ -16,7 +16,7 @@ def logisticRegression():
 
     # 归一化
     scaler = StandardScaler()
-    scaler.fit(x_train)
+    # scaler.fit(x_train)
     x_train = scaler.fit_transform(x_train)
     x_test = scaler.fit_transform(x_test)
 
